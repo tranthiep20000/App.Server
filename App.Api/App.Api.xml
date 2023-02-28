@@ -1,0 +1,557 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>App.Api</name>
+    </assembly>
+    <members>
+        <member name="T:App.Api.Contracts.Common.SystemConfig">
+            <summary>
+            Information of SystemConfig
+            CreatedBy: ThiepTT(27/02/2023)
+            </summary>
+        </member>
+        <member name="F:App.Api.Contracts.Common.SystemConfig.ErrorServer">
+            <summary>
+            ErrorServer
+            </summary>
+        </member>
+        <member name="F:App.Api.Contracts.Common.SystemConfig.NotFound">
+            <summary>
+            ErrorNotFound
+            </summary>
+        </member>
+        <member name="F:App.Api.Contracts.Common.SystemConfig.InternalServerError">
+            <summary>
+            InternalServerError
+            </summary>
+        </member>
+        <member name="T:App.Api.Contracts.Product.Requests.ProductCreate">
+            <summary>
+            Information of ProductCreate
+            CreatedBy: ThiepTT(27/02/2023)
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.Product.Requests.ProductCreate.ProductName">
+            <summary>
+            ProductName
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.Product.Requests.ProductCreate.Slug">
+            <summary>
+            Slug
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.Product.Requests.ProductCreate.ShopId">
+            <summary>
+            ShopId
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.Product.Requests.ProductCreate.ProductDetail">
+            <summary>
+            ProductDetail
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.Product.Requests.ProductCreate.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.Product.Requests.ProductCreate.Trending">
+            <summary>
+            Trending
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.Product.Requests.ProductCreate.File">
+            <summary>
+            File
+            </summary>
+        </member>
+        <member name="T:App.Api.Contracts.Product.Requests.ProductUpdate">
+            <summary>
+            Information of ProductUpdate
+            CreatedBy: ThiepTT(27/02/2023)
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.Product.Requests.ProductUpdate.ProductName">
+            <summary>
+            ProductName
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.Product.Requests.ProductUpdate.Slug">
+            <summary>
+            Slug
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.Product.Requests.ProductUpdate.ProductDetail">
+            <summary>
+            ProductDetail
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.Product.Requests.ProductUpdate.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.Product.Requests.ProductUpdate.Trending">
+            <summary>
+            Trending
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.Product.Requests.ProductUpdate.File">
+            <summary>
+            File
+            </summary>
+        </member>
+        <member name="T:App.Api.Contracts.Shop.Requests.ShopCreate">
+            <summary>
+            Information of ShopCreate
+            CreaetedBy: Thiep(27/02/2023)
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.Shop.Requests.ShopCreate.ShopName">
+            <summary>
+            ShopName
+            </summary>
+        </member>
+        <member name="T:App.Api.Contracts.Shop.Requests.ShopUpdate">
+            <summary>
+            Information of ShopUpdate
+            CreatedBy: ThiepTT(27/02/2023)
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.Shop.Requests.ShopUpdate.ShopName">
+            <summary>
+            ShopName
+            </summary>
+        </member>
+        <member name="T:App.Api.Contracts.User.Requests.UserCreate">
+            <summary>
+            Information of UserCreate
+            CreatedBy: ThiepTT(27/02/2023)
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.User.Requests.UserCreate.UserName">
+            <summary>
+            UserName
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.User.Requests.UserCreate.Email">
+            <summary>
+            Email
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.User.Requests.UserCreate.Password">
+            <summary>
+            Password
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.User.Requests.UserCreate.Type">
+            <summary>
+            Type
+            </summary>
+        </member>
+        <member name="T:App.Api.Contracts.User.Requests.UserUpdate">
+            <summary>
+            Information of UserUpdate
+            CreatedBy: ThiepTT(27/02/2023)
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.User.Requests.UserUpdate.UserName">
+            <summary>
+            UserName
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.User.Requests.UserUpdate.Email">
+            <summary>
+            Email
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.User.Requests.UserUpdate.Password">
+            <summary>
+            Password
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.User.Requests.UserUpdate.Type">
+            <summary>
+            Type
+            </summary>
+        </member>
+        <member name="T:App.Api.Contracts.User.Request.UserEmailPassword">
+            <summary>
+            Information of UserEmailPassword
+            CreatedBy: ThiepTT(28/02/2023)
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.User.Request.UserEmailPassword.Email">
+            <summary>
+            Email
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.User.Request.UserEmailPassword.Password">
+            <summary>
+            Password
+            </summary>
+        </member>
+        <member name="T:App.Api.Controllers.AuthenticationsController">
+            <summary>
+            Information of AuthenticationsController
+            CreatedBy: ThiepTT(28/02/2023)
+            </summary>
+        </member>
+        <member name="M:App.Api.Controllers.AuthenticationsController.#ctor(App.Domain.Interfaces.IServices.IUserService,AutoMapper.IMapper)">
+            <summary>
+            Authentications Controller
+            </summary>
+            <param name="userService">userService</param>
+            <param name="mapper">mapper</param>
+        </member>
+        <member name="M:App.Api.Controllers.AuthenticationsController.LoginForEmail(App.Api.Contracts.User.Request.UserEmailPassword)">
+            <summary>
+            Login for email
+            </summary>
+            <param name="userEmailPassword">UserEmailPassword</param>
+            <returns>IActionResult</returns>
+            CreatedBy: ThiepTT(28/02/2023)
+        </member>
+        <member name="T:App.Api.Controllers.BaseController">
+            <summary>
+            Information of BaseController
+            CreatedBy: ThiepTT(27/02/2023)
+            </summary>
+        </member>
+        <member name="M:App.Api.Controllers.BaseController.HandlerErrorResponse(App.Domain.Entities.Results.Error)">
+            <summary>
+            HandlerErrorResponse
+            </summary>
+            <param name="error">Error</param>
+            <returns>IActionResult</returns>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
+        <member name="T:App.Api.Controllers.ProductsController">
+            <summary>
+            Information of ProductsController
+            CreatedBy: ThiepTT(27/02/2023)
+            </summary>
+        </member>
+        <member name="M:App.Api.Controllers.ProductsController.#ctor(App.Domain.Interfaces.IRepositories.IProductRepository,App.Domain.Interfaces.IServices.IProductService,AutoMapper.IMapper)">
+            <summary>
+            Products Controller
+            </summary>
+            <param name="productRepository">productRepository</param>
+            <param name="productService">productService</param>
+            <param name="mapper">mapper</param>
+        </member>
+        <member name="M:App.Api.Controllers.ProductsController.GetAllProduct">
+            <summary>
+            Get all product
+            </summary>
+            <returns>IActionResult</returns>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
+        <member name="M:App.Api.Controllers.ProductsController.GetAllPagingProduct(System.String,System.Nullable{App.Domain.Enum.TrendingEnum},System.Int32,System.Int32)">
+            <summary>
+            Get all paging product
+            </summary>
+            <param name="valueFilter">ValueFilter</param>
+            <param name="trendingEnum">TrendingEnum</param>
+            <param name="pageNumber">PageNumber</param>
+            <param name="pageSize">PageSize</param>
+            <returns>IActionResult</returns>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
+        <member name="M:App.Api.Controllers.ProductsController.GetProductById(System.Int32)">
+            <summary>
+            Get product by id
+            </summary>
+            <param name="id">Id</param>
+            <returns>IActionResult</returns>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
+        <member name="M:App.Api.Controllers.ProductsController.CreateProduct(App.Api.Contracts.Product.Requests.ProductCreate)">
+            <summary>
+            Create product
+            </summary>
+            <param name="productCreate">ProductCreate</param>
+            <returns>IActionResult</returns>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
+        <member name="M:App.Api.Controllers.ProductsController.UpdateProduct(App.Api.Contracts.Product.Requests.ProductUpdate,System.Int32)">
+            <summary>
+            Update product
+            </summary>
+            <param name="productUpdate">ProductUpdate</param>
+            <param name="id">id</param>
+            <returns>IActionResult</returns>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
+        <member name="M:App.Api.Controllers.ProductsController.DeleteProduct(System.Int32)">
+            <summary>
+            Delete product
+            </summary>
+            <param name="id">Id</param>
+            <returns>IActionResult</returns>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
+        <member name="T:App.Api.Controllers.ShopsController">
+            <summary>
+            Information of ShopsController
+            CreatedBy: ThiepTT(27/02/2023)
+            </summary>
+        </member>
+        <member name="M:App.Api.Controllers.ShopsController.#ctor(App.Domain.Interfaces.IRepositories.IShopRepository,App.Domain.Interfaces.IServices.IShopService,AutoMapper.IMapper)">
+            <summary>
+            Shops Controller
+            </summary>
+            <param name="shopRepository">shopRepository</param>
+            <param name="shopService">shopService</param>
+            <param name="mapper">mapper</param>
+        </member>
+        <member name="M:App.Api.Controllers.ShopsController.GetAllShop">
+            <summary>
+            Get all shop
+            </summary>
+            <returns>IActionResult</returns>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
+        <member name="M:App.Api.Controllers.ShopsController.GetShopById(System.Int32)">
+            <summary>
+            Get shop by id
+            </summary>
+            <param name="id">Id</param>
+            <returns>IActionResult</returns>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
+        <member name="M:App.Api.Controllers.ShopsController.CreateShop(App.Api.Contracts.Shop.Requests.ShopCreate)">
+            <summary>
+            Create shop
+            </summary>
+            <param name="shopCreate">ShopCreate</param>
+            <returns>IActionResult</returns>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
+        <member name="M:App.Api.Controllers.ShopsController.UpdateUser(App.Api.Contracts.Shop.Requests.ShopUpdate,System.Int32)">
+            <summary>
+            Update shop
+            </summary>
+            <param name="shopUpdate">ShopUpdate</param>
+            <param name="id">id</param>
+            <returns>IActionResult</returns>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
+        <member name="M:App.Api.Controllers.ShopsController.DeleteShop(System.Int32)">
+            <summary>
+            Delete shop
+            </summary>
+            <param name="id">Id</param>
+            <returns>IActionResult</returns>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
+        <member name="T:App.Api.Controllers.UsersController">
+            <summary>
+            Information of UsersController
+            CreatedBy: ThiepTT(27/02/2023)
+            </summary>
+        </member>
+        <member name="M:App.Api.Controllers.UsersController.#ctor(App.Domain.Interfaces.IRepositories.IUserRepository,App.Domain.Interfaces.IServices.IUserService,AutoMapper.IMapper)">
+            <summary>
+            Users Controller
+            </summary>
+            <param name="userRepository">userRepository</param>
+            <param name="userService">userService</param>
+            <param name="mapper">mapper</param>
+        </member>
+        <member name="M:App.Api.Controllers.UsersController.GetAllUser">
+            <summary>
+            Get all user
+            </summary>
+            <returns>IActionResult</returns>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
+        <member name="M:App.Api.Controllers.UsersController.GetAllPagingUser(System.String,System.Nullable{System.DateTime},System.Nullable{App.Domain.Enum.TypeEnum},System.Nullable{App.Domain.Enum.DeleteEnum},System.Int32,System.Int32)">
+            <summary>
+            Get all paging user
+            </summary>
+            <param name="valueFilter">ValueFilter</param>
+            <param name="createAt">CreateAt</param>
+            <param name="typeEnum">TypeEnum</param>
+            <param name="deleteEnum">DeleteEnum</param>
+            <param name="pageNumber">PageNumber</param>
+            <param name="pageSize">PageSize</param>
+            <returns>IActionResult</returns>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
+        <member name="M:App.Api.Controllers.UsersController.GetUserById(System.Int32)">
+            <summary>
+            Get user by id
+            </summary>
+            <param name="id">Id</param>
+            <returns>IActionResult</returns>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
+        <member name="M:App.Api.Controllers.UsersController.CreateUser(App.Api.Contracts.User.Requests.UserCreate)">
+            <summary>
+            Create user
+            </summary>
+            <param name="userCreate">UserCreate</param>
+            <returns>IActionResult</returns>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
+        <member name="M:App.Api.Controllers.UsersController.UpdateUser(App.Api.Contracts.User.Requests.UserUpdate,System.Int32)">
+            <summary>
+            Update user
+            </summary>
+            <param name="userUpdate">UpdateUser</param>
+            <param name="id">id</param>
+            <returns>IActionResult</returns>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
+        <member name="M:App.Api.Controllers.UsersController.DeleteUser(System.Int32)">
+            <summary>
+            Delete user
+            </summary>
+            <param name="id">Id</param>
+            <returns>IActionResult</returns>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
+        <member name="T:App.Api.Filters.AppExceptionAttibute">
+            <summary>
+            Information of AppExceptionAttibute
+            CreatedBy: ThiepTT(27/02/2023)
+            </summary>
+        </member>
+        <member name="M:App.Api.Filters.AppExceptionAttibute.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
+            <summary>
+            OnException
+            </summary>
+            <param name="context">ExceptionContext</param>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
+        <member name="T:App.Api.MappingProfiles.ProductMapping">
+            <summary>
+            Information of ProductMapping
+            CreatedBy: ThiepTT(27/02/2023)
+            </summary>
+        </member>
+        <member name="M:App.Api.MappingProfiles.ProductMapping.#ctor">
+            <summary>
+            ProductMapping Contructor
+            </summary>
+        </member>
+        <member name="T:App.Api.MappingProfiles.ShopMapping">
+            <summary>
+            Information of ShopMapping
+            CreatedBy: ThiepTT(27/02/2022)
+            </summary>
+        </member>
+        <member name="M:App.Api.MappingProfiles.ShopMapping.#ctor">
+            <summary>
+            ShopMapping Contructor
+            </summary>
+        </member>
+        <member name="T:App.Api.Options.ApiRouter">
+            <summary>
+            Information of ApiRouter
+            CreatedBy: ThiepTT(27/02/2023)
+            </summary>
+        </member>
+        <member name="T:App.Api.Options.ConfiguraSwagerOption">
+            <summary>
+            Information of ConfiguraSwagerOption
+            CreatedBy: ThiepTT(27/02/2023)
+            </summary>
+        </member>
+        <member name="M:App.Api.Options.ConfiguraSwagerOption.Configure(Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions)">
+            <summary>
+            Configure
+            </summary>
+            <param name="options">Options</param>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
+        <member name="M:App.Api.Options.ConfiguraSwagerOption.GetJwtSecuritySchema">
+            <summary>
+            GetJwtSecuritySchema
+            </summary>
+            <returns>OpenApiSecurityScheme</returns>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
+        <member name="T:App.Api.Registrars.DatabaseRegistrar">
+            <summary>
+            Information of DatabaseRegistrar
+            CreatedBy: ThiepTT(27/02/2023)
+            </summary>
+        </member>
+        <member name="M:App.Api.Registrars.DatabaseRegistrar.RegisterServices(Microsoft.AspNetCore.Builder.WebApplicationBuilder)">
+            <summary>
+            RegisterServices
+            </summary>
+            <param name="builder">WebApplicationBuilder</param>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
+        <member name="T:App.Api.Registrars.IRegistrar">
+            <summary>
+            Information of interface IRegistrar
+            CreatedBy: ThiepTT(27/02/2023)
+            </summary>
+        </member>
+        <member name="T:App.Api.Registrars.IWebApplicationBuilderRegistrar">
+            <summary>
+            Information of IWebApplicationBuilderRegistrar
+            CreatedBy: ThiepTT(27/02/2023)
+            </summary>
+        </member>
+        <member name="T:App.Api.Registrars.IWebApplicationRegistrar">
+            <summary>
+            Information of IWebApplicationRegistrar
+            CreatedBy: ThiepTT(27/02/2023)
+            </summary>
+        </member>
+        <member name="T:App.Api.Registrars.RepositoryRegistrar">
+            <summary>
+            Information of RepositoryRegistrar
+            CreatedBy: ThiepTT(27/02/2023)
+            </summary>
+        </member>
+        <member name="T:App.Api.Registrars.ServiceRegistrar">
+            <summary>
+            Information of RepositoryRegistrar
+            CreatedBy: ThiepTT(27/02/2023)
+            </summary>
+        </member>
+        <member name="T:App.Api.Registrars.WebApplicationBuilderRegistrar">
+            <summary>
+            Information of WebApplicationBuilderRegistrar
+            CreatedBy: ThiepTT(27/02/2023)
+            </summary>
+        </member>
+        <member name="T:App.Api.Registrars.WebApplicationRegistrar">
+            <summary>
+            Information of WebApplicationRegistrar
+            CreatedBy: ThiepTT(27/02/2023)
+            </summary>
+        </member>
+        <member name="T:CwkSocial.API.MappingProfiles.UserProfileMapping">
+            <summary>
+            Information of UserProfileMapping
+            CreatedBy: ThiepTT(27/02/2022)
+            </summary>
+        </member>
+        <member name="M:CwkSocial.API.MappingProfiles.UserProfileMapping.#ctor">
+            <summary>
+            UserProfileMapping Contructor
+            </summary>
+        </member>
+        <member name="T:VnEdu.Api.Registrars.IdentityRegistrar">
+            <summary>
+            Information off IdentityRegistrar
+            CreatedBy: ThiepTT(27/02/2023)
+            </summary>
+        </member>
+        <member name="M:VnEdu.Api.Registrars.IdentityRegistrar.RegisterServices(Microsoft.AspNetCore.Builder.WebApplicationBuilder)">
+            <summary>
+            RegisterServices
+            </summary>
+            <param name="builder">Builder</param>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
+    </members>
+</doc>
