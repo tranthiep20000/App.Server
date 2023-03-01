@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body class="position-relative">
+    <!-- form delete user -->
+    <form id="formdelete" class="position-absolute form-delete bg-secondary p-3 w-25">
+        <div class="row w-100 text-center">
+            <h6 class="w-100 text-white">Xác nhận xóa?</h6>
+        </div>
+        <div class="row d-flex justify-content-between p-3">
+            <div id="backdelete" class="btn btn-primary">Back</div>
+            <div class="btn btn-danger">Delete</div>
+        </div>
+    </form>
+
+    <!-- form delete product -->
+    <form id="formdeleteproduct" class="position-absolute form-delete bg-secondary p-3 w-25">
+        <div class="row w-100 text-center">
+            <h6 class="w-100 text-white">Xác nhận xóa?</h6>
+        </div>
+        <div class="row d-flex justify-content-between p-3">
+            <div id="backdeleteproduct" class="btn btn-primary">Back</div>
+            <div class="btn btn-danger">Delete</div>
+        </div>
+    </form>
+
+    <!-- form save user-->
+    <form id="formsaveuser" class="position-absolute form-save bg-secondary p-3 w-25 text-white">
+        <div class="form-group">
+            <label for="exampleInputEmail1">UserName</label>
+            <input class="form-control" id="username" aria-describedby="emailHelp" placeholder="Nhập username">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email</label>
+            <input class="form-control" id="email" aria-describedby="emailHelp" placeholder="Nhập email">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Nhập password">
+        </div>
+        <div class="row d-flex justify-content-between p-3">
+            <div id="backaddedit" class="btn btn-primary">Back</div>
+            <div class="btn btn-success">Save</div>
+        </div>
+    </form>
+
+    <!-- form save product-->
+    <form id="formsaveproduct" class="position-absolute form-save bg-secondary p-3 w-25 text-white">
+        <div class="form-group">
+            <label for="exampleInputEmail1">ProductName</label>
+            <input class="form-control" id="productname" placeholder="Nhập ProductName">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Slug</label>
+            <input class="form-control" id="slug" placeholder="Nhập Slug">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">ProductDetail</label>
+            <input class="form-control" id="slug" placeholder="Nhập ProductDetail">
+        </div>
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Upload</label>
+            <input class="form-control" type="file" id="formFile">
+        </div>
+        <div class="row d-flex justify-content-between p-3">
+            <div id="backaddeditproduct" class="btn btn-primary">Back</div>
+            <div class="btn btn-success">Save</div>
+        </div>
+    </form>
+
+    <!-- toast message -->
+    <button id="toast-message" type="button" class="btn btn-secondary w-25 position-absolute toast-message text-left">Secondary</button>
+
+    <!-- content -->
+    <div class="container bg-dark">
+        <div class="row w-100">
+            <ul class="nav">
+                <li class="nav-item text-white">
+                    <a class="nav-link active" id="home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="listuser">List User</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="shop">List Shop</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="review">List Reviews</a>
+                </li>
+                <li class="nav-item" id="listproduct">
+                    <a class="nav-link">List Product</a>
+                </li>
+                <li class="nav-item" id="login">
+                    <a class="nav-link">Login</a>
+                </li>
+                <li class="nav-item" id="myprofile">
+                    <a class="nav-link">My Profile</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="formhome" class="container">
+
+    </div>
+    <div id="formlogin" class="container w-50 mt-3">
+        <form class="d-flex flex-column">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email</label>
+                <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <button id="btnLogin" type="submit" class="btn btn-primary d-flex justify-content-center">Login</button>
+        </form>
+    </div>
+
+    <!-- form list user -->
+    <div id="formlistuser" class="container mt-3">
+        <div class="row d-flex flex-row justify-content-between">
+            <div class="input-group mb-3 w-25">
+                <input type="text" class="form-control" placeholder="Nhập tên người dùng" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            </div>
+            <div class="input-group mb-3 w-25">
+                <input type="date" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Lọc theo người dùng
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Tất cả</a>
+                    <a class="dropdown-item" href="#">Admin</a>
+                    <a class="dropdown-item" href="#">User</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Lọc theo trạng thái
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Tất cả</a>
+                    <a class="dropdown-item" href="#">Chưa xóa</a>
+                    <a class="dropdown-item" href="#">Đã xóa</a>
+                </div>
+            </div>
+        </div>
+        <div class="row w-100 d-flex flex-row justify-content-center">
+            <div type="button" class="btn btn-primary">Lọc</div>
+        </div>
+        <div class="row w-100 d-flex flex-row justify-content-end">
+            <button id="adduser" type="button" class="btn btn-success">Add User</button>
+        </div>
+        <div class="row mt-3 overflow-auto box-table">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">UserName</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Password</th>
+                        <th scope="col">CreatedAt</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>admin</td>
+                        <td>Admin@123gmail.com</td>
+                        <td>1234</td>
+                        <td>22-02-2023</td>
+                        <td>đã xóa</td>
+                        <td>
+                            <div id="edit" type="button" class="btn btn-secondary">Edit</div>
+                            <div id="delete" type="button" class="btn btn-danger">Delete</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row mt-3 d-flex justify-content-center">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- form list product  -->
+    <div id="formlistproduct" class="container mt-3">
+        <div class="row d-flex flex-row justify-content-start">
+            <div class="input-group mb-3 w-25">
+                <input type="text" class="form-control" placeholder="Nhập tên sản phẩm">
+            </div>
+            <div class="dropdown ml-3 mr-3">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Lọc trending
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Hot</a>
+                    <a class="dropdown-item" href="#">Normal</a>
+                    <a class="dropdown-item" href="#">Low</a>
+                </div>
+            </div>
+            <div class="btn btn-primary mb-3">Lọc</div>
+        </div>
+        <div class="row w-100 d-flex flex-row justify-content-end">
+            <button id="addproduct" type="button" class="btn btn-success">Add Product</button>
+        </div>
+        <div class="row mt-3 overflow-auto box-table">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">ProductName</th>
+                        <th scope="col">Slug</th>
+                        <th scope="col">Shop</th>
+                        <th scope="col">ProductDetail</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Trending</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Product name</td>
+                        <td>Slug</td>
+                        <td>Shop name</td>
+                        <td>Product detail</td>
+                        <td>Price</td>
+                        <td>Trending</td>
+                        <td>
+                            <div class="text-center">
+                                <img src="../image/download.jpg" class="rounded" alt="...">
+                            </div>
+                        </td>
+                        <td>
+                            <div id="editproduct" type="button" class="btn btn-secondary">Edit</div>
+                            <div id="deleteproduct" type="button" class="btn btn-danger">Delete</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row mt-3 d-flex justify-content-center">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</body>
+
+<!-- Thư viên js -->
+<script src="../js/jquery-3.6.0.min.js"></script>
+<!-- Nhúng script JS của Popper -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<!-- Nhúng script JS của Bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Thư viện dùng riêng  -->
+<script src="../js/index.js"></script>
+
+</html>

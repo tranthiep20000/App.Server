@@ -1,0 +1,47 @@
+body {
+    margin: 0px;
+    font-family: notosans;
+    position: relative;
+    z-index: 1;
+}
+
+.box-table {
+    height: 380px;
+}
+
+.toast-message {
+    right: 10px;
+    bottom: 5px;
+    z-index: 2;
+}
+
+.form-save {
+    z-index: 2;
+    left: 0;
+    right: 0;
+    margin: auto;
+    margin-top: 100px;
+}
+
+.form-delete {
+    z-index: 2;
+    left: 0;
+    right: 0;
+    margin: auto;
+    margin-top: 250px;
+}
+
+@font-face {
+    font-family: notosans;
+    src: url(../../content/fonts/notosans-regular.2cb88a13.woff2);
+}
+
+@font-face {
+    font-family: notosans-Bold;
+    src: url(../../content/fonts/notosans-bold.3ede5aff.woff2);
+}
+
+@font-face {
+    font-family: notosans-Italic;
+    src: url(../../content/fonts/notosans-italic.1c1aaac9.woff2);
+}
