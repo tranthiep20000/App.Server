@@ -10,17 +10,17 @@
             CreatedBy: ThiepTT(27/02/2023)
             </summary>
         </member>
-        <member name="F:App.Api.Contracts.Common.SystemConfig.ErrorServer">
+        <member name="F:App.Api.Contracts.Common.SystemConfig.ERRORSERVER">
             <summary>
             ErrorServer
             </summary>
         </member>
-        <member name="F:App.Api.Contracts.Common.SystemConfig.NotFound">
+        <member name="F:App.Api.Contracts.Common.SystemConfig.NOTFOUND">
             <summary>
             ErrorNotFound
             </summary>
         </member>
-        <member name="F:App.Api.Contracts.Common.SystemConfig.InternalServerError">
+        <member name="F:App.Api.Contracts.Common.SystemConfig.INTERNALSERVERERROR">
             <summary>
             InternalServerError
             </summary>
@@ -411,6 +411,37 @@
             </summary>
             <param name="id">Id</param>
             <returns>IActionResult</returns>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
+        <member name="T:App.Api.Extensions.RegistrarExtension">
+            <summary>
+            Infomation of RegistrarExtension
+            CreatedBy: ThiepTT(27/02/2023)
+            </summary>
+        </member>
+        <member name="M:App.Api.Extensions.RegistrarExtension.RegisterServices(Microsoft.AspNetCore.Builder.WebApplicationBuilder,System.Type)">
+            <summary>
+            RegisterServices
+            </summary>
+            <param name="builder">WebApplicationBuilder</param>
+            <param name="scanningType">Type</param>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
+        <member name="M:App.Api.Extensions.RegistrarExtension.RegisterPipelineConponents(Microsoft.AspNetCore.Builder.WebApplication,System.Type)">
+            <summary>
+            RegisterPipelineConponents
+            </summary>
+            <param name="app">WebApplication</param>
+            <param name="scanningType">Type</param>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
+        <member name="M:App.Api.Extensions.RegistrarExtension.GetRegistrars``1(System.Type)">
+            <summary>
+            GetRegistrars
+            </summary>
+            <typeparam name="T">T</typeparam>
+            <param name="scanningType">Type</param>
+            <returns>IEnumerable T</returns>
             CreatedBy: ThiepTT(27/02/2023)
         </member>
         <member name="T:App.Api.Filters.AppExceptionAttibute">

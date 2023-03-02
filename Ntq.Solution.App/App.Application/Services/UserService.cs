@@ -11,11 +11,11 @@ namespace App.Application.Services
     /// Information of UserService
     /// CreatedBy: ThiepTT(27/02/2022)
     /// </summary>
-    public class UserService : IUserService
+    public class UserService : BaseService<User>, IUserService
     {
         private readonly IUserRepository _userRepository;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository) : base(userRepository)
         {
             _userRepository = userRepository;
         }
@@ -33,7 +33,7 @@ namespace App.Application.Services
             // 1. username is null
             if (string.IsNullOrWhiteSpace(user.UserName))
             {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.UserByNameNotEmpty);
+                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYNAMENOTEMPTY);
 
                 return result;
             }
@@ -44,16 +44,16 @@ namespace App.Application.Services
             // 2. username is already exist
             if (userByUserName.Data is not null)
             {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.UserByNameAlreadyExist);
+                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYNAMEALREADYEXIST);
 
                 return result;
             }
 
             // 3. check length username
-            if (user.UserName.Length < ConfigErrorMessageService.LengthMinCharacterOfUserName
-                || user.UserName.Length > ConfigErrorMessageService.LengthMaxCharacterOfUserName)
+            if (user.UserName.Length < ConfigErrorMessageService.LENGTHMINCHARACTEROFUSERNAME
+                || user.UserName.Length > ConfigErrorMessageService.LENGTHMAXCHARACTEROFUSERNAME)
             {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.UserByCharacter);
+                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYCHARACTER);
 
                 return result;
             }
@@ -61,7 +61,7 @@ namespace App.Application.Services
             // 4. password is null
             if (string.IsNullOrWhiteSpace(user.Password))
             {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.UserByPasswordNotEmpty);
+                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYPASSWORDNOTEMPTY);
 
                 return result;
             }
@@ -69,7 +69,7 @@ namespace App.Application.Services
             // 5. check password
             if (!IsPasswordValid(user.Password))
             {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.UserByPassword);
+                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYPASSWORD);
 
                 return result;
             }
@@ -77,7 +77,7 @@ namespace App.Application.Services
             // 6. email is null
             if (string.IsNullOrWhiteSpace(user.Email))
             {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.UserByEmailNotEmpty);
+                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYEMAILNOTEMPTY);
 
                 return result;
             }
@@ -88,7 +88,7 @@ namespace App.Application.Services
             // 7. email is already exist
             if (userByEmail.Data is not null)
             {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.UserByEmailAlreadyExist);
+                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYEMAILALREADYEXIST);
 
                 return result;
             }
@@ -96,16 +96,16 @@ namespace App.Application.Services
             // 8. check email
             if (!IsEmailValid(user.Email))
             {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.UserByEmailFormat);
+                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYEMAILFORMAT);
 
                 return result;
             }
 
             // 9. check length email
-            if (user.Email.Length < ConfigErrorMessageService.LengthMinCharacterOfEmail 
-                || user.Email.Length > ConfigErrorMessageService.LengthMaxCharacterOfEmail)
+            if (user.Email.Length < ConfigErrorMessageService.LENGTHMINCHARACTEROFEMAIL
+                || user.Email.Length > ConfigErrorMessageService.LENGTHMAXCHARACTEROFEMAIL)
             {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.UserByEmailCharacter);
+                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYEMAILCHARACTER);
 
                 return result;
             }
@@ -113,28 +113,6 @@ namespace App.Application.Services
             try
             {
                 result = await _userRepository.Create(user);
-            }
-            catch (Exception ex)
-            {
-                result.AddError(ErrorCode.ServerError, $"{ex.Message}");
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Delete a record
-        /// </summary>
-        /// <param name="id">Id</param>
-        /// <returns>Number record delete success</returns>
-        /// CreatedBy: ThiepTT(27/02/2022)
-        public async Task<OperationResult<int>> Delete(int id)
-        {
-            var result = new OperationResult<int>();
-
-            try
-            {
-                result = await _userRepository.Delete(id);
             }
             catch (Exception ex)
             {
@@ -158,7 +136,7 @@ namespace App.Application.Services
             // 1. username is null
             if (string.IsNullOrWhiteSpace(user.UserName))
             {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.UserByNameNotEmpty);
+                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYNAMENOTEMPTY);
 
                 return result;
             }
@@ -173,17 +151,17 @@ namespace App.Application.Services
                 if (userByUserName.Data.Email.ToLower().Trim().Equals(user.UserName.ToLower().Trim())
                     && userByUserName.Data.UserId != id)
                 {
-                    result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.UserByNameAlreadyExist);
+                    result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYNAMEALREADYEXIST);
 
                     return result;
                 }
             }
 
             // 3. check length username
-            if (user.UserName.Length < ConfigErrorMessageService.LengthMinCharacterOfUserName
-                || user.UserName.Length > ConfigErrorMessageService.LengthMaxCharacterOfUserName)
+            if (user.UserName.Length < ConfigErrorMessageService.LENGTHMINCHARACTEROFUSERNAME
+                || user.UserName.Length > ConfigErrorMessageService.LENGTHMAXCHARACTEROFUSERNAME)
             {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.UserByCharacter);
+                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYCHARACTER);
 
                 return result;
             }
@@ -191,7 +169,7 @@ namespace App.Application.Services
             // 4. password is null
             if (string.IsNullOrWhiteSpace(user.Password))
             {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.UserByPasswordNotEmpty);
+                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYPASSWORDNOTEMPTY);
 
                 return result;
             }
@@ -199,7 +177,7 @@ namespace App.Application.Services
             // 5. check password
             if (!IsPasswordValid(user.Password))
             {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.UserByPassword);
+                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYPASSWORD);
 
                 return result;
             }
@@ -207,7 +185,7 @@ namespace App.Application.Services
             // 6. email is null
             if (string.IsNullOrWhiteSpace(user.Email))
             {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.UserByEmailNotEmpty);
+                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYEMAILNOTEMPTY);
 
                 return result;
             }
@@ -222,7 +200,7 @@ namespace App.Application.Services
                 if (userByEmail.Data.Email.ToLower().Trim().Equals(user.Email.ToLower().Trim())
                     && userByEmail.Data.UserId != id)
                 {
-                    result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.UserByEmailAlreadyExist);
+                    result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYEMAILALREADYEXIST);
 
                     return result;
                 }
@@ -231,16 +209,16 @@ namespace App.Application.Services
             // 8. check email
             if (!IsEmailValid(user.Email))
             {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.UserByEmailFormat);
+                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYEMAILFORMAT);
 
                 return result;
             }
 
             // 9. check length email
-            if (user.UserName.Length < ConfigErrorMessageService.LengthMinCharacterOfEmail
-                || user.UserName.Length > ConfigErrorMessageService.LengthMaxCharacterOfEmail)
+            if (user.UserName.Length < ConfigErrorMessageService.LENGTHMINCHARACTEROFEMAIL
+                || user.UserName.Length > ConfigErrorMessageService.LENGTHMAXCHARACTEROFEMAIL)
             {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.UserByEmailCharacter);
+                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYEMAILCHARACTER);
 
                 return result;
             }
@@ -270,16 +248,16 @@ namespace App.Application.Services
             // 1. check email
             if (!IsEmailValid(user.Email))
             {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.UserByEmailFormat);
+                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYEMAILFORMAT);
 
                 return result;
             }
 
             // 2. check length email
-            if (user.Email.Length < ConfigErrorMessageService.LengthMinCharacterOfEmail
-                || user.Email.Length > ConfigErrorMessageService.LengthMaxCharacterOfEmail)
+            if (user.Email.Length < ConfigErrorMessageService.LENGTHMINCHARACTEROFEMAIL
+                || user.Email.Length > ConfigErrorMessageService.LENGTHMAXCHARACTEROFEMAIL)
             {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.UserByEmailCharacter);
+                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYEMAILCHARACTER);
 
                 return result;
             }
@@ -287,16 +265,16 @@ namespace App.Application.Services
             // 3. password is null
             if (string.IsNullOrWhiteSpace(user.Password))
             {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.UserByPasswordNotEmpty);
+                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYPASSWORDNOTEMPTY);
 
                 return result;
             }
 
             // 4. check length pasword
-            if (user.Password.Length < ConfigErrorMessageService.LengthMinCharacterOfPassword
-                || user.Password.Length > ConfigErrorMessageService.LengthMaxCharacterOfPassword)
+            if (user.Password.Length < ConfigErrorMessageService.LENGTHMINCHARACTEROFPASSWORD
+                || user.Password.Length > ConfigErrorMessageService.LENGTHMAXCHARACTEROFPASSWORD)
             {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.UserByPasswordCharacter);
+                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYPASSWORDCHARACTER);
 
                 return result;
             }

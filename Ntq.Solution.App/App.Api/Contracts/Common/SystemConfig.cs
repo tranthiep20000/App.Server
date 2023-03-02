@@ -9,16 +9,16 @@
         /// <summary>
         /// ErrorServer
         /// </summary>
-        public const string ErrorServer = "Đã có lỗi xảy ra vui lòng thử lại sau";
+        public const string ERRORSERVER = "Đã có lỗi xảy ra vui lòng thử lại sau";
 
         /// <summary>
         /// ErrorNotFound
         /// </summary>
-        public const string NotFound = "Not Found";
+        public const string NOTFOUND = "Not Found";
 
         /// <summary>
         /// InternalServerError
         /// </summary>
-        public const string InternalServerError = "Internal Server Error";
+        public const string INTERNALSERVERERROR = "Internal Server Error";
     }
 }

@@ -20,7 +20,7 @@ namespace App.Api.Filters
         {
             var apiError = new OperationResult<bool>();
             apiError.Data = false;
-            apiError.AddError(ErrorCode.ServerError, SystemConfig.ErrorServer);
+            apiError.AddError(ErrorCode.ServerError, SystemConfig.ERRORSERVER);
 
             context.Result = new JsonResult(apiError) { StatusCode = 500 };
         }

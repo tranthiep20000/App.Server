@@ -16,130 +16,15 @@ namespace App.DAL.Repositories
     /// Information of UserRepository
     /// CreatedBy: ThiepTT(27/02/2023)
     /// </summary>
-    public class UserRepository : IUserRepository
+    public class UserRepository : BaseRepository<User>, IUserRepository
     {
         private readonly DataContext _dataContext;
         private readonly IdentityService _identityService;
 
-        public UserRepository(DataContext dataContext, IdentityService identityService)
+        public UserRepository(DataContext dataContext, IdentityService identityService) : base(dataContext)
         {
             _dataContext = dataContext;
             _identityService = identityService;
-        }
-
-        /// <summary>
-        /// Create a record
-        /// </summary>
-        /// <param name="user">User</param>
-        /// <returns>Number record create success</returns>
-        /// CreatedBy: ThiepTT(27/02/2023)
-        public async Task<OperationResult<int>> Create(User user)
-        {
-            var result = new OperationResult<int>();
-
-            var strategy = _dataContext.Database.CreateExecutionStrategy();
-
-            await strategy.ExecuteAsync(async () =>
-            {
-                using (var transaction = await _dataContext.Database.BeginTransactionAsync())
-                {
-                    try
-                    {
-                        var userNew = new User()
-                        {
-                            UserName = user.UserName,
-                            Email = user.Email,
-                            Password = Convert.ToBase64String(Encoding.ASCII.GetBytes(user.Password)),
-                            Type = user.Type,
-                            CreateAt = DateTime.Now,
-                        };
-
-                        _dataContext.Users.Add(userNew);
-                        await _dataContext.SaveChangesAsync();
-                        await transaction.CommitAsync();
-
-                        result.Data = 1;
-                    }
-                    catch (Exception ex)
-                    {
-                        await transaction.RollbackAsync();
-                        result.AddError(ErrorCode.ServerError, $"{ex.Message}");
-                    }
-                }
-            });
-
-            return result;
-        }
-
-        /// <summary>
-        /// Delete a record
-        /// </summary>
-        /// <param name="id">Id</param>
-        /// <returns>Number record delete success</returns>
-        /// CreatedBy: ThiepTT(27/02/2023)
-        public async Task<OperationResult<int>> Delete(int id)
-        {
-            var result = new OperationResult<int>();
-
-            var userById = await _dataContext.Users.FirstOrDefaultAsync(u => u.UserId == id);
-
-            // Check userById is null
-            if (userById is null)
-            {
-                result.AddError(ErrorCode.NotFound, string.Format(ConfigErrorMessageRepository.UserByIdNotFound, id));
-
-                return result;
-            }
-
-            var strategy = _dataContext.Database.CreateExecutionStrategy();
-
-            await strategy.ExecuteAsync(async () =>
-            {
-                using (var transaction = await _dataContext.Database.BeginTransactionAsync())
-                {
-                    try
-                    {
-                        userById.DeleteAt = DeleteEnum.Yes;
-                        userById.UpdateAt = DateTime.Now;
-
-                        _dataContext.Users.Update(userById);
-                        await _dataContext.SaveChangesAsync();
-                        await transaction.CommitAsync();
-
-                        result.Data = 1;
-                    }
-                    catch (Exception ex)
-                    {
-                        await transaction.RollbackAsync();
-                        result.AddError(ErrorCode.ServerError, $"{ex.Message}");
-                    }
-                }
-            });
-
-            return result;
-        }
-
-        /// <summary>
-        /// Get all
-        /// </summary>
-        /// <returns>List user</returns>
-        /// CreatedBy: ThiepTT(27/02/2023)
-        public async Task<OperationResult<IEnumerable<User>>> GetAll()
-        {
-            var result = new OperationResult<IEnumerable<User>>();
-
-            try
-            {
-                var users = await _dataContext.Users.ToListAsync();
-
-                result.Data = users;
-            }
-            catch (Exception ex)
-            {
-                result.AddError(ErrorCode.ServerError, $"{ex.Message}");
-            }
-
-            return result;
         }
 
         /// <summary>
@@ -160,13 +45,13 @@ namespace App.DAL.Repositories
 
             if (pageNumber <= 0)
             {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageRepository.pageNumber);
+                result.AddError(ErrorCode.NotFound, ConfigErrorMessageRepository.PAGENUMBER);
 
                 return result;
             }
             if (pageSize <= 0)
             {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageRepository.PageSize);
+                result.AddError(ErrorCode.NotFound, ConfigErrorMessageRepository.PAGESIZE);
 
                 return result;
             }
@@ -218,38 +103,6 @@ namespace App.DAL.Repositories
         }
 
         /// <summary>
-        /// Get by id
-        /// </summary>
-        /// <param name="id">Id</param>
-        /// <returns>User</returns>
-        /// CreatedBy: ThiepTT(27/02/2023)
-        public async Task<OperationResult<User>> GetById(int id)
-        {
-            var result = new OperationResult<User>();
-
-            try
-            {
-                var user = await _dataContext.Users.FirstOrDefaultAsync(u => u.UserId == id);
-
-                // check user is null
-                if (user is null)
-                {
-                    result.AddError(ErrorCode.NotFound, string.Format(ConfigErrorMessageRepository.UserByIdNotFound, id));
-
-                    return result;
-                }
-
-                result.Data = user;
-            }
-            catch (Exception ex)
-            {
-                result.AddError(ErrorCode.ServerError, $"{ex.Message}");
-            }
-
-            return result;
-        }
-
-        /// <summary>
         /// Get by email
         /// </summary>
         /// <param name="email">Email</param>
@@ -267,7 +120,7 @@ namespace App.DAL.Repositories
                 // check user is null
                 if (user is null)
                 {
-                    result.AddError(ErrorCode.NotFound, string.Format(ConfigErrorMessageRepository.UserByEmailNotFound, email));
+                    result.AddError(ErrorCode.NotFound, string.Format(ConfigErrorMessageRepository.USERBYEMAILNOTFOUND, email));
 
                     return result;
                 }
@@ -300,7 +153,7 @@ namespace App.DAL.Repositories
                 // check user is null
                 if (user is null)
                 {
-                    result.AddError(ErrorCode.NotFound, string.Format(ConfigErrorMessageRepository.UserByNameNotFound, userName));
+                    result.AddError(ErrorCode.NotFound, string.Format(ConfigErrorMessageRepository.USERBYNAMENOTFOUND, userName));
 
                     return result;
                 }
@@ -311,56 +164,6 @@ namespace App.DAL.Repositories
             {
                 result.AddError(ErrorCode.ServerError, $"{ex.Message}");
             }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Update a record
-        /// </summary>
-        /// <param name="user">User</param>
-        /// <param name="id">Id</param>
-        /// <returns>Number record update success</returns>
-        /// CreatedBy: ThiepTT(27/02/2023)
-        public async Task<OperationResult<int>> Update(User user, int id)
-        {
-            var result = new OperationResult<int>();
-
-            var userById = await _dataContext.Users.FirstOrDefaultAsync(u => u.UserId == id);
-
-            // Check userById is null
-            if (userById is null)
-            {
-                result.AddError(ErrorCode.NotFound, string.Format(ConfigErrorMessageRepository.UserByIdNotFound, id));
-
-                return result;
-            }
-            var strategy = _dataContext.Database.CreateExecutionStrategy();
-
-            await strategy.ExecuteAsync(async () =>
-            {
-                using (var transaction = await _dataContext.Database.BeginTransactionAsync())
-                {
-                    try
-                    {
-                        userById.UserName = user.UserName;
-                        userById.Email = user.Email;
-                        userById.Password = Convert.ToBase64String(Encoding.ASCII.GetBytes(user.Password));
-                        userById.UpdateAt = DateTime.Now;
-
-                        _dataContext.Users.Update(userById);
-                        await _dataContext.SaveChangesAsync();
-                        await transaction.CommitAsync();
-
-                        result.Data = 1;
-                    }
-                    catch (Exception ex)
-                    {
-                        await transaction.RollbackAsync();
-                        result.AddError(ErrorCode.ServerError, $"{ex.Message}");
-                    }
-                }
-            });
 
             return result;
         }
@@ -385,7 +188,7 @@ namespace App.DAL.Repositories
                 // Check userByEmailPassword is null
                 if (userByEmailPassword is null)
                 {
-                    result.AddError(ErrorCode.NotFound, ConfigErrorMessageRepository.UserByNotLogin);
+                    result.AddError(ErrorCode.NotFound, ConfigErrorMessageRepository.USERBYNOTLOGIN);
 
                     return result;
                 }

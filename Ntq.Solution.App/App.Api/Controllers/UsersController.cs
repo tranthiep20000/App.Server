@@ -17,10 +17,10 @@ namespace App.Api.Controllers
     /// Information of UsersController
     /// CreatedBy: ThiepTT(27/02/2023)
     /// </summary>
-    [Route(ApiRouter.Router)]
+    [Route(ApiRouter.ROUTER)]
     [ApiController]
     [AppExceptionAttibute]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class UsersController : BaseController
     {
         private readonly IUserRepository _userRepository;
@@ -81,7 +81,7 @@ namespace App.Api.Controllers
         /// <returns>IActionResult</returns>
         /// CreatedBy: ThiepTT(27/02/2023)
         [HttpGet]
-        [Route(ApiRouter.Id)]
+        [Route(ApiRouter.ID)]
         public async Task<IActionResult> GetUserById([Required] int id)
         {
             var result = await _userRepository.GetById(id);
@@ -113,7 +113,7 @@ namespace App.Api.Controllers
         /// <returns>IActionResult</returns>
         /// CreatedBy: ThiepTT(27/02/2023)
         [HttpPut]
-        [Route(ApiRouter.Id)]
+        [Route(ApiRouter.ID)]
         public async Task<IActionResult> UpdateUser([FromBody] UserUpdate userUpdate, [Required] int id)
         {
             var user = _mapper.Map<User>(userUpdate);
@@ -130,7 +130,7 @@ namespace App.Api.Controllers
         /// <returns>IActionResult</returns>
         /// CreatedBy: ThiepTT(27/02/2023)
         [HttpDelete]
-        [Route(ApiRouter.Id)]
+        [Route(ApiRouter.ID)]
         public async Task<IActionResult> DeleteUser([Required] int id)
         {
             var result = await _userService.Delete(id);

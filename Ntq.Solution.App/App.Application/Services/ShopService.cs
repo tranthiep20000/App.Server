@@ -10,11 +10,11 @@ namespace App.Application.Services
     /// Information of ShopService
     /// CreatedBy: ThiepTT(27/02/2023)
     /// </summary>
-    public class ShopService : IShopService
+    public class ShopService : BaseService<Shop>, IShopService
     {
         private readonly IShopRepository _shopRepository;
 
-        public ShopService(IShopRepository shopRepository)
+        public ShopService(IShopRepository shopRepository) : base(shopRepository)
         {
             _shopRepository = shopRepository;
         }
@@ -32,7 +32,7 @@ namespace App.Application.Services
             // 1. shopName is null
             if (string.IsNullOrWhiteSpace(shop.ShopName))
             {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.ShopByNameNotEmpty);
+                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.SHOPBYNAMENOTEMPTY);
 
                 return result;
             }
@@ -40,28 +40,6 @@ namespace App.Application.Services
             try
             {
                 result = await _shopRepository.Create(shop);
-            }
-            catch (Exception ex)
-            {
-                result.AddError(ErrorCode.ServerError, $"{ex.Message}");
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Delete a record
-        /// </summary>
-        /// <param name="id">Id</param>
-        /// <returns>Number record delete success</returns>
-        /// CreatedBy: ThiepTT(27/02/2022)
-        public async Task<OperationResult<int>> Delete(int id)
-        {
-            var result = new OperationResult<int>();
-
-            try
-            {
-                result = await _shopRepository.Delete(id);
             }
             catch (Exception ex)
             {
@@ -85,7 +63,7 @@ namespace App.Application.Services
             // 1. shopName is null
             if (string.IsNullOrWhiteSpace(shop.ShopName))
             {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.ShopByNameNotEmpty);
+                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.SHOPBYNAMENOTEMPTY);
 
                 return result;
             }

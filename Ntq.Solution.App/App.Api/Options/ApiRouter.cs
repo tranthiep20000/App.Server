@@ -6,7 +6,7 @@
     /// </summary>
     public static class ApiRouter
     {
-        public const string Router = "api/[controller]";
-        public const string Id = "id";
+        public const string ROUTER = "api/[controller]";
+        public const string ID = "id";
     }
 }

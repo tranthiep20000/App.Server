@@ -12,7 +12,7 @@ namespace App.Api.Controllers
     /// Information of AuthenticationsController
     /// CreatedBy: ThiepTT(28/02/2023)
     /// </summary>
-    [Route(ApiRouter.Router)]
+    [Route(ApiRouter.ROUTER)]
     [ApiController]
     [AppExceptionAttibute]
     public class AuthenticationsController : BaseController

@@ -16,10 +16,10 @@ namespace App.Api.Controllers
     /// Information of ShopsController
     /// CreatedBy: ThiepTT(27/02/2023)
     /// </summary>
-    [Route(ApiRouter.Router)]
+    [Route(ApiRouter.ROUTER)]
     [ApiController]
     [AppExceptionAttibute]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ShopsController : BaseController
     {
         private readonly IShopRepository _shopRepository;
@@ -59,7 +59,7 @@ namespace App.Api.Controllers
         /// <returns>IActionResult</returns>
         /// CreatedBy: ThiepTT(27/02/2023)
         [HttpGet]
-        [Route(ApiRouter.Id)]
+        [Route(ApiRouter.ID)]
         public async Task<IActionResult> GetShopById([Required] int id)
         {
             var result = await _shopRepository.GetById(id);
@@ -91,7 +91,7 @@ namespace App.Api.Controllers
         /// <returns>IActionResult</returns>
         /// CreatedBy: ThiepTT(27/02/2023)
         [HttpPut]
-        [Route(ApiRouter.Id)]
+        [Route(ApiRouter.ID)]
         public async Task<IActionResult> UpdateUser([FromBody] ShopUpdate shopUpdate, [Required] int id)
         {
             var shop = _mapper.Map<Shop>(shopUpdate);
@@ -108,7 +108,7 @@ namespace App.Api.Controllers
         /// <returns>IActionResult</returns>
         /// CreatedBy: ThiepTT(27/02/2023)
         [HttpDelete]
-        [Route(ApiRouter.Id)]
+        [Route(ApiRouter.ID)]
         public async Task<IActionResult> DeleteShop([Required] int id)
         {
             var result = await _shopService.Delete(id);

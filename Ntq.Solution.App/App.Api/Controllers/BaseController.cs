@@ -23,7 +23,7 @@ namespace App.Api.Controllers
             if (error.Code == ErrorCode.NotFound)
             {
                 apiError.StatusCode = 404;
-                apiError.StatusPhrase = SystemConfig.NotFound;
+                apiError.StatusPhrase = SystemConfig.NOTFOUND;
                 apiError.TimeStamp = DateTime.Now;
                 apiError.Errors.Add(error.Message);
 
@@ -31,7 +31,7 @@ namespace App.Api.Controllers
             }
 
             apiError.StatusCode = 500;
-            apiError.StatusPhrase = SystemConfig.InternalServerError;
+            apiError.StatusPhrase = SystemConfig.INTERNALSERVERERROR;
             apiError.TimeStamp = DateTime.Now;
             apiError.Errors.Add(error.Message);
 
