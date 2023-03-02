@@ -3,9 +3,10 @@ $(document).ready(function() {
 })
 
 class Index {
-    URL_API = "";
+    URL_API = "https://app.somee.com";
+    UserId = 0;
     constructor() {
-        $('#formlogin').hide();
+        $('#formlogin').show();
         $('#formhome').hide();
         $('#formlistuser').hide();
         $('#toast-message').hide();
@@ -13,8 +14,10 @@ class Index {
         $('#formsaveproduct').hide();
         $('#formdelete').hide();
         $('#formdeleteproduct').hide();
-        $('#formlistproduct').show();
-
+        $('#formlistproduct').hide();
+        $('#formmyprofile').hide();
+        $('#formwarning').hide();
+        $('#myprofile').hide();
         // event
         this.initEvents();
     }
@@ -25,6 +28,9 @@ class Index {
 
         // click linklogin
         this.clickLinkLogin();
+
+        // click linkmyprofile
+        this.clickLinkMyProflie();
 
         // click linkhome
         this.clickLinkHome();
@@ -56,6 +62,10 @@ class Index {
         this.clickBtnBackAddEditProduct();
 
         this.clickBtnEditProduct();
+
+        this.clickBtnLogout();
+
+        this.clickBtnBackWaring();
     }
 
     clickBtnLogin() {
@@ -69,19 +79,34 @@ class Index {
                 "Email": email,
                 "Password": password
             }
-            debugger
+
             $.ajax({
                 type: "POST",
-                url: "https://localhost:9999/api/v1/Employees",
+                url: `${m.URL_API}/api/Authentications/LoginForEmail`,
                 data: JSON.stringify(user),
                 dataType: "json",
                 async: false,
                 contentType: "application/json",
                 success: function(response) {
+                    $('#myprofile').show();
+                    $('#formmyprofile').show();
+                    $('#login').hide();
+                    $('#formlogin').hide();
 
+                    m.UserId = jwt_decode(response.Data).UserId
+                    debugger
                 },
                 error: function(res) {
-
+                    if (res.responseJSON.StatusCode == 404) {
+                        $('#box-message-warning').empty();
+                        $('#box-message-warning').append(res.responseJSON.Errors[0]);
+                        $('#formwarning').show();
+                    }
+                    if (res.responseJSON.StatusCode == 500) {
+                        $('#box-message-warning').empty();
+                        $('#box-message-warning').append(res.responseJSON.Errors[0]);
+                        $('#formwarning').show();
+                    }
                 }
             });
         })
@@ -90,6 +115,17 @@ class Index {
     clickLinkLogin() {
         $("#login").click(function() {
             $("#formlogin").show();
+            $("#formhome").hide();
+            $("#formlistuser").hide();
+            $("#formlistproduct").hide();
+            $("#formmyprofile").hide();
+        })
+    }
+
+    clickLinkMyProflie() {
+        $("#myprofile").click(function() {
+            $("#formmyprofile").show();
+            $("#formlogin").hide();
             $("#formhome").hide();
             $("#formlistuser").hide();
             $("#formlistproduct").hide();
@@ -102,6 +138,7 @@ class Index {
             $("#formlogin").hide();
             $("#formlistuser").hide();
             $("#formlistproduct").hide();
+            $("#formmyprofile").hide();
         })
     }
 
@@ -111,6 +148,7 @@ class Index {
             $("#formlogin").hide();
             $("#formhome").hide();
             $("#formlistproduct").hide();
+            $("#formmyprofile").hide();
         })
     }
 
@@ -120,6 +158,7 @@ class Index {
             $("#formlistuser").hide();
             $("#formlogin").hide();
             $("#formhome").hide();
+            $("#formmyprofile").hide();
         })
     }
 
@@ -153,6 +192,12 @@ class Index {
         })
     }
 
+    clickBtnBackWaring() {
+        $("#backwaring").click(function() {
+            $("#formwarning").hide();
+        })
+    }
+
     clickBtnDeleteProduct() {
         $("#deleteproduct").click(function() {
             $("#formdeleteproduct").show();
@@ -180,6 +225,15 @@ class Index {
     clickBtnBackAddEditProduct() {
         $("#backaddeditproduct").click(function() {
             $("#formsaveproduct").hide();
+        })
+    }
+
+    clickBtnLogout() {
+        $("#btnlogout").click(function() {
+            $("#login").show();
+            $("#formlogin").show();
+            $("#formmyprofile").hide();
+            $("#myprofile").hide();
         })
     }
 }

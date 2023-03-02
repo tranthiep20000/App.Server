@@ -1,6 +1,7 @@
 ﻿using App.Domain.Entities;
 using App.Domain.Entities.Results;
 using App.Domain.Enum;
+using App.Domain.Options;
 
 namespace App.Domain.Interfaces.IRepositories
 {
@@ -21,7 +22,7 @@ namespace App.Domain.Interfaces.IRepositories
         /// <param name="pageSize">PageSize</param>
         /// <returns>List User</returns>
         /// CreaetedBy: Thiep(27/02/2023)
-        public Task<OperationResult<IEnumerable<User>>> GetAllPaging(string? valueFiler, DateTime? createAt, TypeEnum? typeEnum,
+        public Task<OperationResult<PagingResult<User>>> GetAllPaging(string? valueFiler, DateTime? createAt, TypeEnum? typeEnum,
             DeleteEnum? deleteEnum, int pageNumber, int pageSize);
 
         /// <summary>

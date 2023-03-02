@@ -20,10 +20,10 @@ namespace App.DAL.Migrations
                     ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Slug = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ShopId = table.Column<int>(type: "int", nullable: false),
-                    ProductDetail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductDetail = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<double>(type: "float", nullable: false),
-                    Trending = table.Column<byte>(type: "tinyint", nullable: false),
-                    Upload = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Trending = table.Column<byte>(type: "tinyint", nullable: true),
+                    Upload = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteAt = table.Column<byte>(type: "tinyint", nullable: false)

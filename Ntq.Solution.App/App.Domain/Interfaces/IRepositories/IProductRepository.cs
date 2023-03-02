@@ -1,6 +1,7 @@
 ﻿using App.Domain.Entities;
 using App.Domain.Entities.Results;
 using App.Domain.Enum;
+using App.Domain.Options;
 using Microsoft.AspNetCore.Http;
 
 namespace App.Domain.Interfaces.IRepositories
@@ -20,7 +21,7 @@ namespace App.Domain.Interfaces.IRepositories
         /// <param name="pageSize">PageSize</param>
         /// <returns>List Product</returns>
         /// CreaetedBy: Thiep(27/02/2023)
-        public Task<OperationResult<IEnumerable<Product>>> GetAllPaging(string? valueFiler, TrendingEnum? trendingEnum, int pageNumber,
+        public Task<OperationResult<PagingResult<Product>>> GetAllPaging(string? valueFiler, TrendingEnum? trendingEnum, int pageNumber,
             int pageSize);
     }
 }

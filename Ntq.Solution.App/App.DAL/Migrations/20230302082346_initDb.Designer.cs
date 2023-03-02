@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.DAL.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230228043304_UpdatePropertityProduct")]
-    partial class UpdatePropertityProduct
+    [Migration("20230302082346_initDb")]
+    partial class initDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

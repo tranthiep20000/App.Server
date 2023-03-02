@@ -11,6 +11,15 @@
 </head>
 
 <body class="position-relative">
+    <form id="formwarning" class="position-absolute form-delete bg-secondary p-3 w-25">
+        <div class="row text-center">
+            <h6 id="box-message-warning" class="w-100 text-white"></h6>
+        </div>
+        <div class="row d-flex justify-content-end p-3">
+            <div id="backwaring" class="btn btn-primary">Back</div>
+        </div>
+    </form>
+
     <!-- form delete user -->
     <form id="formdelete" class="position-absolute form-delete bg-secondary p-3 w-25">
         <div class="row w-100 text-center">
@@ -65,7 +74,7 @@
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1">ProductDetail</label>
-            <input class="form-control" id="slug" placeholder="Nhập ProductDetail">
+            <input class="form-control" id="productdetail" placeholder="Nhập ProductDetail">
         </div>
         <div class="mb-3">
             <label for="formFile" class="form-label">Upload</label>
@@ -108,9 +117,13 @@
             </ul>
         </div>
     </div>
+
+    <!-- form home -->
     <div id="formhome" class="container">
 
     </div>
+
+    <!-- form login -->
     <div id="formlogin" class="container w-50 mt-3">
         <form class="d-flex flex-column">
             <div class="form-group">
@@ -121,7 +134,37 @@
                 <label for="exampleInputPassword1">Password</label>
                 <input type="password" class="form-control" id="exampleInputPassword1">
             </div>
-            <button id="btnLogin" type="submit" class="btn btn-primary d-flex justify-content-center">Login</button>
+            <div id="btnLogin" class="btn btn-primary d-flex justify-content-center">Login</div>
+        </form>
+    </div>
+
+    <!-- form my profile -->
+    <div id="formmyprofile" class="container mt-3 w-50">
+        <form class="d-flex flex-column">
+            <div class="form-group">
+                <label for="exampleInputEmail1">UserName</label>
+                <input class="form-control" placeholder="Nhập UserName">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" placeholder="Nhập password">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Confirm password</label>
+                <input type="password" class="form-control" placeholder="Nhập xác nhận password">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Email</label>
+                <input type="email" readonly class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Type</label>
+                <input type="input" class="form-control">
+            </div>
+            <div class="row d-flex justify-content-between p-3">
+                <div id="btnlogout" class="btn btn-primary">Logout</div>
+                <div class="btn btn-success">Update</div>
+            </div>
         </form>
     </div>
 
@@ -277,6 +320,7 @@
 
 <!-- Thư viên js -->
 <script src="../js/jquery-3.6.0.min.js"></script>
+<script src="../js/jwt-decode/build/jwt-decode.js"></script>
 <!-- Nhúng script JS của Popper -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <!-- Nhúng script JS của Bootstrap -->

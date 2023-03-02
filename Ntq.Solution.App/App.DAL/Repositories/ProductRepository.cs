@@ -4,6 +4,7 @@ using App.Domain.Entities;
 using App.Domain.Entities.Results;
 using App.Domain.Enum;
 using App.Domain.Interfaces.IRepositories;
+using App.Domain.Options;
 using Microsoft.EntityFrameworkCore;
 
 namespace App.DAL.Repositories
@@ -30,10 +31,10 @@ namespace App.DAL.Repositories
         /// <param name="pageSize">PageSize</param>
         /// <returns>List product</returns>
         /// CreatedBy: ThiepTT(27/02/2023)
-        public async Task<OperationResult<IEnumerable<Product>>> GetAllPaging(string? valueFiler, TrendingEnum? trendingEnum,
+        public async Task<OperationResult<PagingResult<Product>>> GetAllPaging(string? valueFiler, TrendingEnum? trendingEnum,
             int pageNumber, int pageSize)
         {
-            var result = new OperationResult<IEnumerable<Product>>();
+            var result = new OperationResult<PagingResult<Product>>();
 
             if (pageNumber <= 0)
             {
@@ -72,7 +73,14 @@ namespace App.DAL.Repositories
                 var toTalRecord = products.Count();
                 var toTalPage = (toTalRecord % pageSize) == 0 ? ((int)toTalRecord / (int)pageSize) : ((int)toTalRecord / (int)pageSize + 1);
 
-                result.Data = productsPaging;
+                var pagingResult = new PagingResult<Product>()
+                {
+                    ToTalPage = toTalPage,
+                    ToTalRecord = toTalRecord,
+                    Data = productsPaging
+                };
+
+                result.Data = pagingResult;
             }
             catch (Exception ex)
             {

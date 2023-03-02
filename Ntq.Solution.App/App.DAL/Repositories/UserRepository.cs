@@ -4,6 +4,7 @@ using App.Domain.Entities;
 using App.Domain.Entities.Results;
 using App.Domain.Enum;
 using App.Domain.Interfaces.IRepositories;
+using App.Domain.Options;
 using Microsoft.EntityFrameworkCore;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -38,10 +39,10 @@ namespace App.DAL.Repositories
         /// <param name="pageSize">PageSize</param>
         /// <returns>List user</returns>
         /// CreatedBy: ThiepTT(27/02/2023)
-        public async Task<OperationResult<IEnumerable<User>>> GetAllPaging(string? valueFiler, DateTime? createAt, TypeEnum? typeEnum,
+        public async Task<OperationResult<PagingResult<User>>> GetAllPaging(string? valueFiler, DateTime? createAt, TypeEnum? typeEnum,
             DeleteEnum? deleteEnum, int pageNumber, int pageSize)
         {
-            var result = new OperationResult<IEnumerable<User>>();
+            var result = new OperationResult<PagingResult<User>>();
 
             if (pageNumber <= 0)
             {
@@ -91,8 +92,15 @@ namespace App.DAL.Repositories
 
                 var toTalRecord = users.Count();
                 var toTalPage = (toTalRecord % pageSize) == 0 ? ((int)toTalRecord / (int)pageSize) : ((int)toTalRecord / (int)pageSize + 1);
+                
+                var pagingResult = new PagingResult<User>()
+                {
+                    ToTalPage = toTalPage,
+                    ToTalRecord = toTalRecord,
+                    Data = usersPaging
+                };
 
-                result.Data = usersPaging;
+                result.Data = pagingResult;
             }
             catch (Exception ex)
             {
