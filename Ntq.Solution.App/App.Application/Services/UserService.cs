@@ -215,8 +215,8 @@ namespace App.Application.Services
             }
 
             // 9. check length email
-            if (user.UserName.Length < ConfigErrorMessageService.LENGTHMINCHARACTEROFEMAIL
-                || user.UserName.Length > ConfigErrorMessageService.LENGTHMAXCHARACTEROFEMAIL)
+            if (user.Email.Length < ConfigErrorMessageService.LENGTHMINCHARACTEROFEMAIL
+                || user.Email.Length > ConfigErrorMessageService.LENGTHMAXCHARACTEROFEMAIL)
             {
                 result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYEMAILCHARACTER);
 

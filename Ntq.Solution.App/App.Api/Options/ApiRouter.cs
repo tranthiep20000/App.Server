@@ -7,6 +7,6 @@
     public static class ApiRouter
     {
         public const string ROUTER = "api/[controller]";
-        public const string ID = "id";
+        public const string ID = "{id}";
     }
 }

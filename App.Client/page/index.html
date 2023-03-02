@@ -143,27 +143,33 @@
         <form class="d-flex flex-column">
             <div class="form-group">
                 <label for="exampleInputEmail1">UserName</label>
-                <input class="form-control" placeholder="Nhập UserName">
+                <input id="usernameinfor" class="form-control" placeholder="Nhập UserName">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" placeholder="Nhập password">
+                <input id="passwordinfor" type="password" class="form-control" placeholder="Nhập password">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Confirm password</label>
-                <input type="password" class="form-control" placeholder="Nhập xác nhận password">
+                <input id="passwordconfirminfor" type="password" class="form-control" placeholder="Nhập xác nhận password">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Email</label>
-                <input type="email" readonly class="form-control">
+                <input id="emailinfor" type="email" readonly class="form-control">
             </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Type</label>
-                <input type="input" class="form-control">
+            <label for="exampleInputPassword1">Type user</label>
+            <div class="dropdown">
+                <div class="btn btn-secondary dropdown-toggle" id="dropdowntypeuser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Admin
+                </div>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <div id="typeadmin" class="dropdown-item">Admin</div>
+                    <div id="typeuser" class="dropdown-item">User</div>
+                </div>
             </div>
             <div class="row d-flex justify-content-between p-3">
                 <div id="btnlogout" class="btn btn-primary">Logout</div>
-                <div class="btn btn-success">Update</div>
+                <div id="btnUpdateInfor" class="btn btn-success">Update</div>
             </div>
         </form>
     </div>

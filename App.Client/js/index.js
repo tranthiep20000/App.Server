@@ -66,6 +66,129 @@ class Index {
         this.clickBtnLogout();
 
         this.clickBtnBackWaring();
+
+        this.clickBtnUpdateUserInfor();
+
+        $("#typeadmin").click(function() {
+            $('#dropdowntypeuser').empty();
+            $('#dropdowntypeuser').append("Admin");
+        })
+
+        $("#typeuser").click(function() {
+            $('#dropdowntypeuser').empty();
+            $('#dropdowntypeuser').append("User");
+        })
+    }
+
+    convertTypeUser(value) {
+        if (value == 1) {
+            return "Admin";
+        } else if (value == 2) {
+            return "User";
+        } else {
+            return "";
+        }
+    }
+
+    convertTypeUserToEnum(value) {
+        if (value == "Admin") {
+            return 1;
+        } else if (value == "User") {
+            return 2;
+        } else {
+            return null;
+        }
+    }
+
+    clickBtnUpdateUserInfor() {
+        var m = this;
+        $("#btnUpdateInfor").click(function() {
+            const userName = $('#usernameinfor').val();
+            const password = $('#passwordinfor').val();
+            const passwordConfirm = $('#passwordconfirminfor').val();
+            const email = $('#emailinfor').val();
+            const typeUser = $('#dropdowntypeuser').text();
+            let type = m.convertTypeUserToEnum(typeUser);
+
+            if (password != passwordConfirm) {
+                $('#box-message-warning').empty();
+                $('#box-message-warning').append("password và passwordconfirm không khớp");
+                $('#formwarning').show();
+
+                return;
+            }
+
+            let user = {
+                "UserName": userName,
+                "Password": password,
+                "Email": email,
+                "Type": type
+            }
+
+            $.ajax({
+                type: "PUT",
+                url: `${m.URL_API}/api/Users/${m.UserId}`,
+                data: JSON.stringify(user),
+                dataType: "json",
+                async: false,
+                contentType: "application/json",
+                success: function(response) {
+                    m.getUserById(m.UserId, m);
+                    debugger
+                    $('#toast-message').empty();
+                    $('#toast-message').append("Sửa thông tin thành công");
+                    $('#toast-message').show();
+                    setTimeout(function() {
+                        $('#toast-message').hide();
+                    }, 3000);
+
+                    console.log(response);
+                },
+                error: function(res) {
+                    if (res.responseJSON.StatusCode == 404) {
+                        $('#box-message-warning').empty();
+                        $('#box-message-warning').append(res.responseJSON.Errors[0]);
+                        $('#formwarning').show();
+                    }
+                    if (res.responseJSON.StatusCode == 500) {
+                        $('#box-message-warning').empty();
+                        $('#box-message-warning').append(res.responseJSON.Errors[0]);
+                        $('#formwarning').show();
+                    }
+                }
+            });
+        })
+    }
+
+    getUserById(id, m) {
+        $.ajax({
+            type: "GET",
+            url: `${m.URL_API}/api/Users/${id}`,
+            async: false,
+            dataType: "json",
+            success: function(response) {
+                let user = response.Data
+
+                $("#usernameinfor").val(user.UserName);
+                $("#passwordinfor").val(atob(user.Password));
+                $("#passwordconfirminfor").val(atob(user.Password));
+                $("#emailinfor").val(user.Email);
+                $('#dropdowntypeuser').empty();
+                $('#dropdowntypeuser').append(m.convertTypeUser(user.Type));
+            },
+            error: function(res) {
+                if (res.responseJSON.StatusCode == 404) {
+                    $('#box-message-warning').empty();
+                    $('#box-message-warning').append(res.responseJSON.Errors[0]);
+                    $('#formwarning').show();
+                }
+                if (res.responseJSON.StatusCode == 500) {
+                    $('#box-message-warning').empty();
+                    $('#box-message-warning').append(res.responseJSON.Errors[0]);
+                    $('#formwarning').show();
+                }
+            }
+        });
     }
 
     clickBtnLogin() {
@@ -88,13 +211,14 @@ class Index {
                 async: false,
                 contentType: "application/json",
                 success: function(response) {
+                    m.UserId = jwt_decode(response.Data).UserId
+
+                    m.getUserById(m.UserId, m);
+
                     $('#myprofile').show();
                     $('#formmyprofile').show();
                     $('#login').hide();
                     $('#formlogin').hide();
-
-                    m.UserId = jwt_decode(response.Data).UserId
-                    debugger
                 },
                 error: function(res) {
                     if (res.responseJSON.StatusCode == 404) {
