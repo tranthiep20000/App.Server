@@ -11,7 +11,7 @@
 </head>
 
 <body class="position-relative">
-    <form id="formwarning" class="position-absolute form-delete bg-secondary p-3 w-25">
+    <form id="formwarning" class="position-absolute form-waring bg-warning p-3 w-25">
         <div class="row text-center">
             <h6 id="box-message-warning" class="w-100 text-white"></h6>
         </div>
@@ -22,12 +22,12 @@
 
     <!-- form delete user -->
     <form id="formdelete" class="position-absolute form-delete bg-secondary p-3 w-25">
-        <div class="row w-100 text-center">
+        <div class="row text-center">
             <h6 class="w-100 text-white">Xác nhận xóa?</h6>
         </div>
         <div class="row d-flex justify-content-between p-3">
             <div id="backdelete" class="btn btn-primary">Back</div>
-            <div class="btn btn-danger">Delete</div>
+            <div id="btnDeleteUser" class="btn btn-danger">Delete</div>
         </div>
     </form>
 
@@ -56,14 +56,24 @@
             <label for="exampleInputPassword1">Password</label>
             <input type="password" class="form-control" id="password" placeholder="Nhập password">
         </div>
+        <label for="exampleInputPassword1">Type user</label>
+        <div class="dropdown">
+            <div class="btn btn-info dropdown-toggle" id="typeSave" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Admin
+            </div>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div id="typeAdminSave" class="dropdown-item">Admin</div>
+                <div id="typeUserSave" class="dropdown-item">User</div>
+            </div>
+        </div>
         <div class="row d-flex justify-content-between p-3">
             <div id="backaddedit" class="btn btn-primary">Back</div>
-            <div class="btn btn-success">Save</div>
+            <div id="saveUser" class="btn btn-success">Save</div>
         </div>
     </form>
 
     <!-- form save product-->
-    <form id="formsaveproduct" class="position-absolute form-save bg-secondary p-3 w-25 text-white">
+    <form id="formsaveproduct" class="position-absolute form-save-product bg-secondary p-3 w-50 text-white">
         <div class="form-group">
             <label for="exampleInputEmail1">ProductName</label>
             <input class="form-control" id="productname" placeholder="Nhập ProductName">
@@ -72,9 +82,33 @@
             <label for="exampleInputEmail1">Slug</label>
             <input class="form-control" id="slug" placeholder="Nhập Slug">
         </div>
+        <div class="dropdown">
+            <div class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Chọn shop
+            </div>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="dropdown-item">A</div>
+                <div class="dropdown-item">B</div>
+                <div class="dropdown-item">C</div>
+            </div>
+        </div>
         <div class="form-group">
             <label for="exampleInputEmail1">ProductDetail</label>
             <input class="form-control" id="productdetail" placeholder="Nhập ProductDetail">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Price</label>
+            <input class="form-control" id="price" placeholder="Nhập Price">
+        </div>
+        <div class="dropdown">
+            <div class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Chọn trending
+            </div>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="dropdown-item">Hot</div>
+                <div class="dropdown-item">Normal</div>
+                <div class="dropdown-item">Low</div>
+            </div>
         </div>
         <div class="mb-3">
             <label for="formFile" class="form-label">Upload</label>
@@ -87,7 +121,7 @@
     </form>
 
     <!-- toast message -->
-    <button id="toast-message" type="button" class="btn btn-secondary w-25 position-absolute toast-message text-left">Secondary</button>
+    <button id="toast-message" type="button" class="btn btn-success w-25 position-absolute toast-message text-left">Secondary</button>
 
     <!-- content -->
     <div class="container bg-dark">
@@ -178,52 +212,53 @@
     <div id="formlistuser" class="container mt-3">
         <div class="row d-flex flex-row justify-content-between">
             <div class="input-group mb-3 w-25">
-                <input type="text" class="form-control" placeholder="Nhập tên người dùng" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input id="valueFilterUserName" type="text" class="form-control" placeholder="Nhập tên UserName" aria-label="Recipient's username" aria-describedby="basic-addon2">
             </div>
             <div class="input-group mb-3 w-25">
-                <input type="date" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input id="createAtUser" type="date" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
             </div>
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Lọc theo người dùng
-                </button>
+                <div class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Tất cả
+                </div>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Tất cả</a>
-                    <a class="dropdown-item" href="#">Admin</a>
-                    <a class="dropdown-item" href="#">User</a>
+                    <div id="allUserFilter" class="dropdown-item">Tất cả</div>
+                    <div id="adminFilter" class="dropdown-item">Admin</div>
+                    <div id="userFilter" class="dropdown-item">User</div>
                 </div>
             </div>
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Lọc theo trạng thái
-                </button>
+                <div class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuStatus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Tất cả
+                </div>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Tất cả</a>
-                    <a class="dropdown-item" href="#">Chưa xóa</a>
-                    <a class="dropdown-item" href="#">Đã xóa</a>
+                    <div id="allStatusFilter" class="dropdown-item">Tất cả</div>
+                    <div id="notActive" class="dropdown-item">Chưa xóa</div>
+                    <div id="isActive" class="dropdown-item">Đã xóa</div>
                 </div>
             </div>
         </div>
         <div class="row w-100 d-flex flex-row justify-content-center">
-            <div type="button" class="btn btn-primary">Lọc</div>
+            <div id="filterUser" class="btn btn-primary">Lọc</div>
         </div>
         <div class="row w-100 d-flex flex-row justify-content-end">
-            <button id="adduser" type="button" class="btn btn-success">Add User</button>
+            <div id="adduser" class="btn btn-success">Add User</div>
         </div>
-        <div class="row mt-3 overflow-auto box-table">
+        <div id="boxDataUser" class="row mt-3 overflow-auto box-table">
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">STT</th>
+                        <th scope="col">Id</th>
                         <th scope="col">UserName</th>
                         <th scope="col">Email</th>
                         <th scope="col">Password</th>
+                        <th scope="col">Type</th>
                         <th scope="col">CreatedAt</th>
                         <th scope="col">Status</th>
                         <th scope="col">Chức năng</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tbodyUser">
                     <tr>
                         <th scope="row">1</th>
                         <td>admin</td>
@@ -239,14 +274,25 @@
                 </tbody>
             </table>
         </div>
+        <div id="boxNullDataUser" class="row mt-3 overflow-auto box-table text-center align-content-center justify-content-center">
+            <h1 class="text-center">No Data</h1>
+        </div>
         <div class="row mt-3 d-flex justify-content-center">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    <div id="previousUser" class="page-link">Previous</div>
+                    <div id="paging" class="d-flex flex-row">
+                        <li class="page-item">
+                            <div class="page-link">1</div>
+                        </li>
+                        <li class="page-item">
+                            <div class="page-link">2</div>
+                        </li>
+                        <li class="page-item">
+                            <div class="page-link">3</div>
+                        </li>
+                    </div>
+                    <div id="nextUser" class="page-link">Next</div>
                 </ul>
             </nav>
         </div>
@@ -256,28 +302,29 @@
     <div id="formlistproduct" class="container mt-3">
         <div class="row d-flex flex-row justify-content-start">
             <div class="input-group mb-3 w-25">
-                <input type="text" class="form-control" placeholder="Nhập tên sản phẩm">
+                <input id="valueFilterProductName" type="text" class="form-control" placeholder="Nhập tên sản phẩm">
             </div>
             <div class="dropdown ml-3 mr-3">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Lọc trending
-                </button>
+                <div class="btn btn-secondary dropdown-toggle" type="button" id="dropdownTrending" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Tất cả
+                </div>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Hot</a>
-                    <a class="dropdown-item" href="#">Normal</a>
-                    <a class="dropdown-item" href="#">Low</a>
+                    <div id="allTrending" class="dropdown-item" href="#">Tất cả</div>
+                    <div id="hotTrending" class="dropdown-item" href="#">Hot</div>
+                    <div id="normalTrending" class="dropdown-item" href="#">Normal</div>
+                    <div id="lowTrending" class="dropdown-item" href="#">Low</div>
                 </div>
             </div>
-            <div class="btn btn-primary mb-3">Lọc</div>
+            <div id="btnFilterProduct" class="btn btn-primary mb-3">Lọc</div>
         </div>
         <div class="row w-100 d-flex flex-row justify-content-end">
             <button id="addproduct" type="button" class="btn btn-success">Add Product</button>
         </div>
-        <div class="row mt-3 overflow-auto box-table">
+        <div id="boxDataProduct" class="row mt-3 overflow-auto box-table">
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">STT</th>
+                        <th scope="col">Id</th>
                         <th scope="col">ProductName</th>
                         <th scope="col">Slug</th>
                         <th scope="col">Shop</th>
@@ -288,7 +335,7 @@
                         <th scope="col">Chức năng</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tbodyProduct">
                     <tr>
                         <th scope="row">1</th>
                         <td>Product name</td>
@@ -310,14 +357,25 @@
                 </tbody>
             </table>
         </div>
+        <div id="boxNullDataProduct" class="row mt-3 overflow-auto box-table text-center align-content-center justify-content-center">
+            <h1 class="text-center">No Data</h1>
+        </div>
         <div class="row mt-3 d-flex justify-content-center">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    <div id="previousProduct" class="page-link">Previous</div>
+                    <div id="pagingProduct" class="d-flex flex-row">
+                        <li class="page-item">
+                            <div class="page-link">1</div>
+                        </li>
+                        <li class="page-item">
+                            <div class="page-link">2</div>
+                        </li>
+                        <li class="page-item">
+                            <div class="page-link">3</div>
+                        </li>
+                    </div>
+                    <div id="nextProduct" class="page-link">Next</div>
                 </ul>
             </nav>
         </div>

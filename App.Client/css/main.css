@@ -23,12 +23,35 @@ body {
     margin-top: 100px;
 }
 
+.form-save-product {
+    z-index: 2;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
 .form-delete {
     z-index: 2;
     left: 0;
     right: 0;
     margin: auto;
     margin-top: 250px;
+}
+
+.form-waring {
+    z-index: 3;
+    left: 0;
+    right: 0;
+    margin: auto;
+    margin-top: 250px;
+}
+
+.tr-height {
+    height: 10px;
+}
+
+.active-color {
+    background-color: aqua;
 }
 
 @font-face {
