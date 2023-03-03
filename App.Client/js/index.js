@@ -15,7 +15,7 @@ class Index {
     TotalPageProduct = 0;
     UserIdSelected = 0;
     constructor() {
-        $('#formlogin').hide();
+        $('#formlogin').show();
         $('#formhome').hide();
         $('#formlistuser').hide();
         $('#toast-message').hide();
@@ -23,7 +23,7 @@ class Index {
         $('#formsaveproduct').hide();
         $('#formdelete').hide();
         $('#formdeleteproduct').hide();
-        $('#formlistproduct').show();
+        $('#formlistproduct').hide();
         $('#formmyprofile').hide();
         $('#formwarning').hide();
         $('#myprofile').hide();
