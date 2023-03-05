@@ -227,6 +227,14 @@
             <returns>IActionResult</returns>
             CreatedBy: ThiepTT(27/02/2023)
         </member>
+        <member name="M:App.Api.Controllers.BaseController.ConvertFormFileToString(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Convert formfile to string
+            </summary>
+            <param name="file">IFormFile</param>
+            <returns>String url image</returns>
+            CreatedBy: ThiepTT(04/03/2023)
+        </member>
         <member name="T:App.Api.Controllers.ProductsController">
             <summary>
             Information of ProductsController

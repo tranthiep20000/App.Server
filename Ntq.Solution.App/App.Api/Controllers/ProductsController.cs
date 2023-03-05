@@ -100,12 +100,7 @@ namespace App.Api.Controllers
 
             if (productCreate.File != null && productCreate.File.Length > 0)
             {
-                using (var stream = new MemoryStream())
-                {
-                    await productCreate.File.CopyToAsync(stream);
-
-                    product.Upload = stream.ToArray();
-                }
+                product.Upload = await ConvertFormFileToString(productCreate.File);
             }
 
             var result = await _productService.Create(product);
@@ -128,12 +123,7 @@ namespace App.Api.Controllers
 
             if (productUpdate.File != null && productUpdate.File.Length > 0)
             {
-                using (var stream = new MemoryStream())
-                {
-                    await productUpdate.File.CopyToAsync(stream);
-
-                    product.Upload = stream.ToArray();
-                }
+                product.Upload = await ConvertFormFileToString(productUpdate.File);
             }
 
             var result = await _productService.Update(product, id);

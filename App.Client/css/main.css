@@ -1,70 +1,76 @@
-body {
-    margin: 0px;
-    font-family: notosans;
-    position: relative;
-    z-index: 1;
-}
-
-.box-table {
-    height: 380px;
-}
-
-.toast-message {
-    top: 5px;
-    right: 5px;
-    z-index: 2;
-}
-
-.form-save {
-    z-index: 2;
-    left: 0;
-    right: 0;
-    margin: auto;
-    margin-top: 100px;
-}
-
-.form-save-product {
-    z-index: 2;
-    left: 0;
-    right: 0;
-    margin: auto;
-}
-
-.form-delete {
-    z-index: 2;
-    left: 0;
-    right: 0;
-    margin: auto;
-    margin-top: 250px;
-}
-
-.form-waring {
-    z-index: 3;
-    left: 0;
-    right: 0;
-    margin: auto;
-    margin-top: 250px;
-}
-
-.tr-height {
-    height: 10px;
-}
-
-.active-color {
-    background-color: aqua;
-}
-
-@font-face {
-    font-family: notosans;
-    src: url(../../content/fonts/notosans-regular.2cb88a13.woff2);
-}
-
-@font-face {
-    font-family: notosans-Bold;
-    src: url(../../content/fonts/notosans-bold.3ede5aff.woff2);
-}
-
-@font-face {
-    font-family: notosans-Italic;
-    src: url(../../content/fonts/notosans-italic.1c1aaac9.woff2);
-}
+    body {
+        margin: 0px;
+        font-family: notosans;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .box-table {
+        height: 380px;
+    }
+    
+    .toast-message {
+        top: 5px;
+        right: 5px;
+        z-index: 2;
+    }
+    
+    .form-save {
+        z-index: 2;
+        left: 0;
+        right: 0;
+        margin: auto;
+        margin-top: 100px;
+    }
+    
+    .form-save-product {
+        z-index: 2;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+    
+    .form-delete {
+        z-index: 2;
+        left: 0;
+        right: 0;
+        margin: auto;
+        margin-top: 250px;
+    }
+    
+    .form-waring {
+        z-index: 3;
+        left: 0;
+        right: 0;
+        margin: auto;
+        margin-top: 250px;
+    }
+    
+    .tr-height {
+        height: 10px;
+    }
+    
+    .active-color {
+        background-color: aqua;
+    }
+    
+    .img-product {
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
+    }
+    
+    @font-face {
+        font-family: notosans;
+        src: url(../../content/fonts/notosans-regular.2cb88a13.woff2);
+    }
+    
+    @font-face {
+        font-family: notosans-Bold;
+        src: url(../../content/fonts/notosans-bold.3ede5aff.woff2);
+    }
+    
+    @font-face {
+        font-family: notosans-Italic;
+        src: url(../../content/fonts/notosans-italic.1c1aaac9.woff2);
+    }

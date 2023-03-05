@@ -8,14 +8,16 @@ class Index {
     Mode = "";
     PageNumber = 1;
     PageSizeUser = 10;
+    PageNumberProduct = 1;
     PageSizeProduct = 15;
     TotalRecordUser = 0;
     TotalPageUser = 0;
     TotalRecordProduct = 0;
     TotalPageProduct = 0;
     UserIdSelected = 0;
+    ProductIdSelected = 0;
     constructor() {
-        $('#formlogin').show();
+        $('#formlogin').hide();
         $('#formhome').hide();
         $('#formlistuser').hide();
         $('#toast-message').hide();
@@ -23,7 +25,7 @@ class Index {
         $('#formsaveproduct').hide();
         $('#formdelete').hide();
         $('#formdeleteproduct').hide();
-        $('#formlistproduct').hide();
+        $('#formlistproduct').show();
         $('#formmyprofile').hide();
         $('#formwarning').hide();
         $('#myprofile').hide();
@@ -32,6 +34,7 @@ class Index {
         this.initEvents();
         this.loadDataUser();
         this.loadDataProduct();
+        this.loadDataShop();
     }
 
     initEvents() {
@@ -85,6 +88,8 @@ class Index {
 
         this.clickBtnConfirmDeleteUser();
 
+        this.clickBtnConfirmDeleteProduct();
+
         this.clickBtnFilterUser();
 
         this.clickBtnFilterProduct();
@@ -94,6 +99,16 @@ class Index {
         this.clickBtnNext();
 
         this.clickBtnPrevious();
+
+        this.clickBtnNumberPagingProduct();
+
+        this.clickBtnNextProduct();
+
+        this.clickBtnPreviousProduct();
+
+        this.clickBtnItemShop();
+
+        this.clickBtnSaveProduct();
 
         $("#typeadmin").click(function() {
             $('#dropdowntypeuser').empty();
@@ -168,6 +183,21 @@ class Index {
         $("#lowTrending").click(function() {
             $('#dropdownTrending').empty();
             $('#dropdownTrending').append("Low");
+        })
+
+        $("#hotTrendingSave").click(function() {
+            $('#dropdownTrendingProduct').empty();
+            $('#dropdownTrendingProduct').append("Hot");
+        })
+
+        $("#normalTrendingSave").click(function() {
+            $('#dropdownTrendingProduct').empty();
+            $('#dropdownTrendingProduct').append("Normal");
+        })
+
+        $("#lowTrendingSave").click(function() {
+            $('#dropdownTrendingProduct').empty();
+            $('#dropdownTrendingProduct').append("Low");
         })
     }
 
@@ -335,6 +365,112 @@ class Index {
                         }, 3000);
 
                         $("#formsaveuser").hide();
+                        console.log(response);
+                    },
+                    error: function(res) {
+                        if (res.responseJSON.StatusCode == 404) {
+                            $('#box-message-warning').empty();
+                            $('#box-message-warning').append(res.responseJSON.Errors[0]);
+                            $('#formwarning').show();
+                        }
+                        if (res.responseJSON.StatusCode == 500) {
+                            $('#box-message-warning').empty();
+                            $('#box-message-warning').append(res.responseJSON.Errors[0]);
+                            $('#formwarning').show();
+                        }
+                    }
+                });
+            }
+        })
+    }
+
+    convertJsonToFormData(jsonObject) {
+        let formData = new FormData();
+        for (let key in jsonObject) {
+            if (jsonObject.hasOwnProperty(key)) {
+                formData.append(key, jsonObject[key]);
+            }
+        }
+        return formData;
+    }
+
+    clickBtnSaveProduct() {
+        var m = this;
+
+        $("#saveProduct").click(function() {
+            const productName = $('#productname').val();
+            const slug = $('#slug').val();
+            const shopId = $(".itemShop").data('id');
+            const productDetail = $('#productdetail').val();
+            const price = $('#price').val();
+            const trending = m.convertTypeTrending($('#dropdownTrendingProduct').text());
+            const upload = $('#formFile').prop("files")[0];
+
+            debugger
+            let product = {
+                "ProductName": productName,
+                "Slug": slug,
+                "ShopId": shopId,
+                "ProductDetail": productDetail,
+                "Price": price,
+                "Trending": trending,
+                "Upload": upload
+            }
+
+            debugger
+            let formData = m.convertJsonToFormData(product);
+
+            if (m.Mode == 'add') {
+                $.ajax({
+                    type: "POST",
+                    url: `${m.URL_API}/api/Products`,
+                    data: formData,
+                    processData: false,
+                    async: false,
+                    contentType: false,
+                    success: function(response) {
+                        m.loadDataProduct();
+                        $('#toast-message').empty();
+                        $('#toast-message').append("Thêm mới thông tin product thành công");
+                        $('#toast-message').show();
+                        setTimeout(function() {
+                            $('#toast-message').hide();
+                        }, 3000);
+
+                        $("#formsaveproduct").hide();
+                        console.log(response);
+                    },
+                    error: function(res) {
+                        if (res.responseJSON.StatusCode == 404) {
+                            $('#box-message-warning').empty();
+                            $('#box-message-warning').append(res.responseJSON.Errors[0]);
+                            $('#formwarning').show();
+                        }
+                        if (res.responseJSON.StatusCode == 500) {
+                            $('#box-message-warning').empty();
+                            $('#box-message-warning').append(res.responseJSON.Errors[0]);
+                            $('#formwarning').show();
+                        }
+                    }
+                });
+            } else {
+                $.ajax({
+                    type: "PUT",
+                    url: `${m.URL_API}/api/Products/${m.ProductIdSelected}`,
+                    data: formData,
+                    async: false,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        m.loadDataUser();
+                        $('#toast-message').empty();
+                        $('#toast-message').append("Sửa thông tin product thành công");
+                        $('#toast-message').show();
+                        setTimeout(function() {
+                            $('#toast-message').hide();
+                        }, 3000);
+
+                        $("#formsaveproduct").hide();
                         console.log(response);
                     },
                     error: function(res) {
@@ -544,6 +680,11 @@ class Index {
         $("#adduser").click(function() {
             $("#formsaveuser").show();
             m.Mode = "add";
+
+            $('#username').val("");
+            $('#password').val("");
+            $('#email').val("");
+            $('#typeSave').text("Chọn type user");
         })
     }
 
@@ -565,7 +706,16 @@ class Index {
                     $('#typeSave').append(m.convertTypeUser(response.Data.Type));
                 },
                 error: function(res) {
-                    console.log("Lỗi Api");
+                    if (res.responseJSON.StatusCode == 404) {
+                        $('#box-message-warning').empty();
+                        $('#box-message-warning').append(res.responseJSON.Errors[0]);
+                        $('#formwarning').show();
+                    }
+                    if (res.responseJSON.StatusCode == 500) {
+                        $('#box-message-warning').empty();
+                        $('#box-message-warning').append(res.responseJSON.Errors[0]);
+                        $('#formwarning').show();
+                    }
                 }
             })
         });
@@ -593,12 +743,41 @@ class Index {
         });
     }
 
+    clickBtnNumberPagingProduct() {
+        var m = this;
+        $('#pagingProduct').on('click', '.pageActiveProduct', function() {
+            m.PageNumberProduct = $(this).data('id');
+            m.loadDataProduct();
+        });
+    }
+
+    clickBtnItemShop() {
+        var m = this;
+        $('#shopProduct').on('click', '.itemShop', function() {
+            $("#dropdownShop").text($(this).text());
+        });
+    }
+
     clickBtnNext() {
         var m = this;
         $("#nextUser").click(function() {
             if (m.PageNumber < m.TotalPageUser) {
                 m.PageNumber++;
                 m.loadDataUser();
+            } else {
+                $('#box-message-warning').empty();
+                $('#box-message-warning').append("Đã đến trang cuối cùng");
+                $('#formwarning').show();
+            }
+        })
+    }
+
+    clickBtnNextProduct() {
+        var m = this;
+        $("#nextProduct").click(function() {
+            if (m.PageNumberProduct < m.TotalPageProduct) {
+                m.PageNumberProduct++;
+                m.loadDataProduct();
             } else {
                 $('#box-message-warning').empty();
                 $('#box-message-warning').append("Đã đến trang cuối cùng");
@@ -621,6 +800,20 @@ class Index {
         })
     }
 
+    clickBtnPreviousProduct() {
+        var m = this;
+        $("#previousProduct").click(function() {
+            if (m.PageNumberProduct > 1) {
+                m.PageNumberProduct--;
+                m.loadDataProduct();
+            } else {
+                $('#box-message-warning').empty();
+                $('#box-message-warning').append("Đã đến trang đầu tiên");
+                $('#formwarning').show();
+            }
+        })
+    }
+
     clickBtnBackDelete() {
         $("#backdelete").click(function() {
             $("#formdelete").hide();
@@ -634,9 +827,11 @@ class Index {
     }
 
     clickBtnDeleteProduct() {
-        $("#deleteproduct").click(function() {
+        var m = this;
+        $('#tbodyProduct').on('click', '.btnDeleteProduct', function() {
+            m.ProductIdSelected = $(this).data('id');
             $("#formdeleteproduct").show();
-        })
+        });
     }
 
     clickBtnBackDeleteProduct() {
@@ -646,15 +841,53 @@ class Index {
     }
 
     clickBtnAddUserProduct() {
+        var m = this;
         $("#addproduct").click(function() {
             $("#formsaveproduct").show();
+            m.Mode = "add";
+
+            $('#productname').val("");
+            $('#slug').val("");
+            $('#productdetail').val("");
+            $('#price').val("");
+            $('#dropdownTrendingProduct').text("Chọn trending");
         })
     }
 
     clickBtnEditProduct() {
-        $("#editproduct").click(function() {
+        var m = this;
+        $('#tbodyProduct').on('click', '.btnEditProduct', function() {
+            m.ProductIdSelected = $(this).data('id1');
             $("#formsaveproduct").show();
-        })
+            m.Mode = "edit";
+
+            $.ajax({
+                type: "GET",
+                url: `${m.URL_API}/api/Products/${m.ProductIdSelected}`,
+                success: function(response) {
+                    $("#productname").val(response.Data.ProductName);
+                    $("#slug").val(response.Data.Slug);
+                    $("#dropdownShop").empty();
+                    $('#dropdownShop').append(m.getShopNameById(response.Data.ShopId));
+                    $("#productdetail").val(response.Data.ProductDetail);
+                    $("#price").val(response.Data.Price);
+                    $("#dropdownTrendingProduct").empty();
+                    $('#dropdownTrendingProduct').append(m.convertTypeTrendingToEnum(response.Data.Trending));
+                },
+                error: function(res) {
+                    if (res.responseJSON.StatusCode == 404) {
+                        $('#box-message-warning').empty();
+                        $('#box-message-warning').append(res.responseJSON.Errors[0]);
+                        $('#formwarning').show();
+                    }
+                    if (res.responseJSON.StatusCode == 500) {
+                        $('#box-message-warning').empty();
+                        $('#box-message-warning').append(res.responseJSON.Errors[0]);
+                        $('#formwarning').show();
+                    }
+                }
+            })
+        });
     }
 
     clickBtnBackAddEditProduct() {
@@ -686,6 +919,43 @@ class Index {
                     $('#toast-message').append("Xóa thành công");
                     $('#toast-message').show();
                     $("#formdelete").hide();
+                    setTimeout(function() {
+                        $('#toast-message').hide();
+                    }, 3000);
+
+                    console.log(response);
+                },
+                error: function(res) {
+                    if (res.responseJSON.StatusCode == 404) {
+                        $('#box-message-warning').empty();
+                        $('#box-message-warning').append(res.responseJSON.Errors[0]);
+                        $('#formwarning').show();
+                    }
+                    if (res.responseJSON.StatusCode == 500) {
+                        $('#box-message-warning').empty();
+                        $('#box-message-warning').append(res.responseJSON.Errors[0]);
+                        $('#formwarning').show();
+                    }
+                }
+            });
+        })
+    }
+
+    clickBtnConfirmDeleteProduct() {
+        var m = this;
+
+        $("#btnConfirmDelete").click(function() {
+            debugger
+            $.ajax({
+                type: "DELETE",
+                url: `${m.URL_API}/api/Products/${m.ProductIdSelected}`,
+                success: function(response) {
+                    m.loadDataProduct();
+
+                    $('#toast-message').empty();
+                    $('#toast-message').append("Xóa thành công");
+                    $('#toast-message').show();
+                    $("#formdeleteproduct").hide();
                     setTimeout(function() {
                         $('#toast-message').hide();
                     }, 3000);
@@ -849,7 +1119,7 @@ class Index {
 
         $.ajax({
             type: "GET",
-            url: `${m.URL_API}/api/Products/GetAllPagingProduct?valueFilter=${valueFilter}&trendingEnum=${status}&pageNumber=${m.PageNumber}&pageSize=${m.PageSizeProduct}`,
+            url: `${m.URL_API}/api/Products/GetAllPagingProduct?valueFilter=${valueFilter}&trendingEnum=${status}&pageNumber=${m.PageNumberProduct}&pageSize=${m.PageSizeProduct}`,
             async: false,
             dataType: "json",
             success: function(response) {
@@ -875,7 +1145,7 @@ class Index {
                             <td>${m.convertTypeTrendingToEnum(product.Trending)}</td>
                             <td>
                                 <div class="text-center">
-                                    <img src="data:image/jpeg;base64,${btoa(String.fromCharCode(...new Uint8Array(product.Upload)))}">
+                                    <img class="img-product" src="${product.Upload}">
                                 </div>
                             </td>
                             <td>
@@ -886,12 +1156,12 @@ class Index {
                         $('#tbodyProduct').append(trHTML);
                     }
 
-                    var pages = m.pagings(m.PageNumber, m.TotalPageProduct);
+                    var pageProducts = m.pagings(m.PageNumberProduct, m.TotalPageProduct);
 
                     $('#pagingProduct').empty();
-                    for (const page of pages) {
+                    for (const pageProduct of pageProducts) {
                         let trHTML = $(`<li class="page-item">
-                            <div class="page-link pageActive" data-id="${page}">${page}</div>
+                            <div class="page-link pageActiveProduct" data-id="${pageProduct}">${pageProduct}</div>
                         </li>`);
                         $('#pagingProduct').append(trHTML);
                     }
@@ -911,5 +1181,39 @@ class Index {
                 }
             }
         });
+    }
+
+    loadDataShop() {
+        var m = this;
+
+        let shops = [];
+
+        $.ajax({
+            type: "GET",
+            url: `${m.URL_API}/api/Shops`,
+            async: false,
+            dataType: "json",
+            success: function(response) {
+                shops = response.Data;
+                $('#shopProduct').empty();
+                for (const shop of shops) {
+                    let trHTML = $(`<div class="dropdown-item itemShop" data-id="${shop.ShopId}">${shop.ShopName}</div>`);
+                    $('#shopProduct').append(trHTML);
+                }
+            },
+            error: function(res) {
+                if (res.responseJSON.StatusCode == 404) {
+                    $('#box-message-warning').empty();
+                    $('#box-message-warning').append(res.responseJSON.Errors[0]);
+                    $('#formwarning').show();
+                }
+                if (res.responseJSON.StatusCode == 500) {
+                    $('#box-message-warning').empty();
+                    $('#box-message-warning').append(res.responseJSON.Errors[0]);
+                    $('#formwarning').show();
+                }
+            }
+        });
+
     }
 }

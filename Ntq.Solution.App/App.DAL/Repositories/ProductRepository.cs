@@ -51,7 +51,7 @@ namespace App.DAL.Repositories
 
             try
             {
-                var products = await _dataContext.Products.ToListAsync();
+                var products = await _dataContext.Products.Where(p => p.DeleteAt == DeleteEnum.No).ToListAsync();
 
                 // check valueFilter is not null
                 if (!string.IsNullOrWhiteSpace(valueFiler))

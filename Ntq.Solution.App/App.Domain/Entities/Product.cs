@@ -48,6 +48,6 @@ namespace App.Domain.Entities
         /// <summary>
         /// Upload
         /// </summary>
-        public byte[] Upload { get; set; } = default!;
+        public string Upload { get; set; } = string.Empty;
     }
 }

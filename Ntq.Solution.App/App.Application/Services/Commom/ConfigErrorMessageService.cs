@@ -26,7 +26,7 @@
 
         public const string SHOPBYNAMENOTEMPTY = "Shop không được để trống";
 
-        public const string PRODUCTBYNAMENOTEMPTY = "Product không được để trống";
+        public const string PRODUCTBYNAMENOTEMPTY = "ProductName không được để trống";
         public const int LENGTHMINCHARACTEROFPRODUCTNAME = 2;
         public const int LENGTHMAXCHARACTEROFPRODUCTNAME = 50;
         public const string PRODUCTBYSLUGNOTEMPTY = "Slug không được để trống";
@@ -35,7 +35,7 @@
         public const string PRODUCTBYSHOPNOTEMPTY = "Shop không được để trống";
         public const string PRODUCTBYPRICENOTEMPTY = "Price không được để trống";
         public const string PRODUCTBYUPLOADNOTEMPTY = "Image không được để trống";
-        public const string PRODUCTBYCHARACTER = "Product phải từ 2-50 kí tự";
+        public const string PRODUCTBYCHARACTER = "ProductName phải từ 2-50 kí tự";
         public const string PRODUCTBYSLUGCHARACTER = "Slug phải từ 2-150 kí tự";
         public const string PRODUCTBYSHOPNOTFOUND = "Không tìm thấy shop có Id là <{0}>";
     }

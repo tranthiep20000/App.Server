@@ -93,7 +93,7 @@ namespace App.Application.Services
             }
 
             // 7. upload is null
-            if (product.Upload is null)
+            if (string.IsNullOrWhiteSpace(product.Upload))
             {
                 result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.PRODUCTBYUPLOADNOTEMPTY);
 
@@ -174,7 +174,7 @@ namespace App.Application.Services
             }
 
             // 7. upload is null
-            if (product.Upload is null)
+            if (string.IsNullOrWhiteSpace(product.Upload))
             {
                 result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.PRODUCTBYUPLOADNOTEMPTY);
 
