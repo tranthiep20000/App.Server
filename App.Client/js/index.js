@@ -4,6 +4,7 @@ $(document).ready(function() {
 
 class Index {
     URL_API = "https://app.somee.com";
+    //URL_API = "http://localhost:82";
     UserId = 0;
     ShopId = 0;
     Mode = "";
@@ -19,14 +20,14 @@ class Index {
     ProductIdSelected = 0;
     constructor() {
         $('#formlogin').hide();
-        $('#formhome').hide();
+        $('#formhome').show();
         $('#formlistuser').hide();
         $('#toast-message').hide();
         $('#formsaveuser').hide();
         $('#formsaveproduct').hide();
         $('#formdelete').hide();
         $('#formdeleteproduct').hide();
-        $('#formlistproduct').show();
+        $('#formlistproduct').hide();
         $('#formmyprofile').hide();
         $('#formwarning').hide();
         $('#myprofile').hide();
@@ -39,28 +40,20 @@ class Index {
     }
 
     initEvents() {
-        // click btnlogin
         this.clickBtnLogin();
 
-        // click linklogin
         this.clickLinkLogin();
 
-        // click linkmyprofile
         this.clickLinkMyProflie();
 
-        // click linkhome
         this.clickLinkHome();
 
-        // click linklistuser
         this.clickLinkListUser();
 
-        // click linklistproduct
         this.clickLinkListProduct();
 
-        // click btnadduser
         this.clickBtnAddUser();
 
-        // click btnbackaddedit
         this.clickBtnBackAddEdit();
 
         this.clickBtnBackDelete();
@@ -204,7 +197,7 @@ class Index {
 
     convertDate(value) {
         let dateOfBirth = new Date(value);
-        dateOfBirth.setHours(dateOfBirth.getHours() + 7);
+
         let date = dateOfBirth.getDate();
         let month = dateOfBirth.getMonth() + 1;
         let year = dateOfBirth.getFullYear();
@@ -288,6 +281,16 @@ class Index {
         } else {
             return "";
         }
+    }
+
+    convertJsonToFormData(jsonObject) {
+        let formData = new FormData();
+        for (let key in jsonObject) {
+            if (jsonObject.hasOwnProperty(key)) {
+                formData.append(key, jsonObject[key]);
+            }
+        }
+        return formData;
     }
 
     clickBtnSaveUser() {
@@ -377,16 +380,6 @@ class Index {
         })
     }
 
-    convertJsonToFormData(jsonObject) {
-        let formData = new FormData();
-        for (let key in jsonObject) {
-            if (jsonObject.hasOwnProperty(key)) {
-                formData.append(key, jsonObject[key]);
-            }
-        }
-        return formData;
-    }
-
     clickBtnSaveProduct() {
         var m = this;
 
@@ -453,8 +446,9 @@ class Index {
                     data: formData,
                     processData: false,
                     contentType: false,
+                    async: false,
                     success: function(response) {
-                        m.loadDataUser();
+                        m.loadDataProduct();
                         $('#toast-message').empty();
                         $('#toast-message').append("Sửa thông tin product thành công");
                         $('#toast-message').show();
@@ -1109,6 +1103,7 @@ class Index {
     loadDataProduct() {
         var m = this;
         $('#tbodyProduct').empty();
+        $('#boxCardsProduct').empty();
 
         let products = [];
 
@@ -1152,6 +1147,18 @@ class Index {
                             </td>
                         </tr>`);
                         $('#tbodyProduct').append(trHTML);
+
+                        let divHTML = $(`
+                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 card mb-3">
+                                <img src="${product.Upload}" class="card-img-top img-product" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Tên: ${product.ProductName}</h5>
+                                    <p class="card-text">Giá: ${product.Price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
+                                    <p class="card-text">Mô tả: ${product.ProductDetail}</p>
+                                </div>
+                            </div>
+                        `);
+                        $('#boxCardsProduct').append(divHTML);
                     }
 
                     $('#pagingProduct').empty();
@@ -1207,6 +1214,5 @@ class Index {
                 }
             }
         });
-
     }
 }

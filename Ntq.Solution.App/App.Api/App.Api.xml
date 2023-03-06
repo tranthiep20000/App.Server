@@ -82,6 +82,11 @@
             Slug
             </summary>
         </member>
+        <member name="P:App.Api.Contracts.Product.Requests.ProductUpdate.ShopId">
+            <summary>
+            ShopId
+            </summary>
+        </member>
         <member name="P:App.Api.Contracts.Product.Requests.ProductUpdate.ProductDetail">
             <summary>
             ProductDetail

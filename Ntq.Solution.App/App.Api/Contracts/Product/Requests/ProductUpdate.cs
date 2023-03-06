@@ -19,6 +19,11 @@ namespace App.Api.Contracts.Product.Requests
         public string? Slug { get; set; } = string.Empty;
 
         /// <summary>
+        /// ShopId
+        /// </summary>
+        public int? ShopId { get; set; }
+
+        /// <summary>
         /// ProductDetail
         /// </summary>
         public string? ProductDetail { get; set; } = string.Empty;
