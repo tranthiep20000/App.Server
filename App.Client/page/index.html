@@ -10,411 +10,408 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
-<body class="position-relative">
-    <!-- form waring -->
-    <form id="formwarning" class="position-absolute form-waring bg-success p-3 w-25">
-        <div class="row text-center">
-            <h6 id="box-message-warning" class="w-100 text-white"></h6>
-        </div>
-        <div class="row d-flex justify-content-end p-3">
-            <div id="backwaring" class="btn btn-primary">Back</div>
-        </div>
-    </form>
+<body>
+    <div id="loader" class="spinner-border" role="status">
 
-    <!-- form delete user -->
-    <form id="formdelete" class="position-absolute form-delete bg-secondary p-3 w-25">
-        <div class="row text-center">
-            <h6 class="w-100 text-white">Xác nhận xóa?</h6>
-        </div>
-        <div class="row d-flex justify-content-between p-3">
-            <div id="backdelete" class="btn btn-primary">No</div>
-            <div id="btnDeleteUser" class="btn btn-danger">Yes</div>
-        </div>
-    </form>
-
-    <!-- form delete product -->
-    <form id="formdeleteproduct" class="position-absolute form-delete bg-secondary p-3 w-25">
-        <div class="row text-center">
-            <h6 class="w-100 text-white">Xác nhận xóa?</h6>
-        </div>
-        <div class="row d-flex justify-content-between p-3">
-            <div id="backdeleteproduct" class="btn btn-primary">No</div>
-            <div id="btnConfirmDelete" class="btn btn-danger">Yes</div>
-        </div>
-    </form>
-
-    <!-- form save user-->
-    <form id="formsaveuser" class="position-absolute form-save bg-secondary p-3 w-25 text-white">
-        <div class="form-group">
-            <label for="exampleInputEmail1">UserName</label>
-            <input class="form-control" id="username" aria-describedby="emailHelp" placeholder="Nhập username">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputEmail1">Email</label>
-            <input class="form-control" id="email" aria-describedby="emailHelp" placeholder="Nhập email">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Nhập password">
-        </div>
-        <label for="exampleInputPassword1">Type user</label>
-        <div class="dropdown">
-            <div class="btn btn-info dropdown-toggle" id="typeSave" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Admin
-            </div>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <div id="typeAdminSave" class="dropdown-item">Admin</div>
-                <div id="typeUserSave" class="dropdown-item">User</div>
-            </div>
-        </div>
-        <div class="row d-flex justify-content-between p-3">
-            <div id="backaddedit" class="btn btn-primary">Back</div>
-            <div id="saveUser" class="btn btn-success">Save</div>
-        </div>
-    </form>
-
-    <!-- form save product-->
-    <form id="formsaveproduct" class="position-absolute form-save-product bg-secondary p-3 w-50 text-white">
-        <div class="form-group">
-            <label for="exampleInputEmail1">ProductName</label>
-            <input class="form-control" id="productname" placeholder="Nhập ProductName">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputEmail1">Slug</label>
-            <input class="form-control" id="slug" placeholder="Nhập Slug">
-        </div>
-        <div id="shopCreate" class="dropdown">
-            <div id="dropdownShop" class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Chọn shop
-            </div>
-            <div id="shopProduct" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <div class="dropdown-item">A</div>
-                <div class="dropdown-item">B</div>
-                <div class="dropdown-item">C</div>
-            </div>
-        </div>
-        <div id="shopEdit" class="form-group">
-            <label for="exampleInputEmail1">Shop</label>
-            <input class="form-control" id="labelShopName" readonly>
-        </div>
-        <div class="form-group">
-            <label for="exampleInputEmail1">ProductDetail</label>
-            <input class="form-control" id="productdetail" placeholder="Nhập ProductDetail">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputEmail1">Price</label>
-            <input class="form-control" id="price" placeholder="Nhập Price">
-        </div>
-        <div class="dropdown">
-            <div id="dropdownTrendingProduct" class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Chọn trending
-            </div>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <div id="hotTrendingSave" class="dropdown-item">Hot</div>
-                <div id="normalTrendingSave" class="dropdown-item">Normal</div>
-                <div id="lowTrendingSave" class="dropdown-item">Low</div>
-            </div>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Upload</label>
-            <input class="form-control" type="file" id="formFile">
-        </div>
-        <div class="row d-flex justify-content-between p-3">
-            <div id="backaddeditproduct" class="btn btn-primary">Back</div>
-            <div id="saveProduct" class="btn btn-success">Save</div>
-        </div>
-    </form>
-
-    <!-- toast message -->
-    <button id="toast-message" type="button" class="btn btn-success w-25 position-absolute toast-message text-left">Secondary</button>
-
-    <!-- content -->
-    <div class="container bg-dark">
-        <div class="row w-100">
-            <ul class="nav">
-                <li class="nav-item text-white">
-                    <a class="nav-link active" id="home">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="listuser">List User</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="shop">List Shop</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="review">List Reviews</a>
-                </li>
-                <li class="nav-item" id="listproduct">
-                    <a class="nav-link">List Product</a>
-                </li>
-                <li class="nav-item" id="login">
-                    <a class="nav-link">Login</a>
-                </li>
-                <li class="nav-item" id="myprofile">
-                    <a class="nav-link">My Profile</a>
-                </li>
-            </ul>
-        </div>
     </div>
-
-    <!-- form list shop -->
-    <div id="formlistshop" class="container mt-3">
-        <div class="row">
-            <h2>Danh sách shop</h2>
-        </div>
-        <div id="boxCardsShop" class="row">
-            <div class="card m-3">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
+    <div id="content" class="position-relative" style="display:none;">
+        <!-- form waring -->
+        <form id="formwarning" class="position-absolute form-waring bg-success p-3 w-25">
+            <div class="row text-center">
+                <h6 id="box-message-warning" class="w-100 text-white"></h6>
             </div>
-        </div>
-    </div>
-
-    <!-- form home -->
-    <div id="formhome" class="container mt-3">
-        <div class="row">
-            <h2>Danh sách product</h2>
-        </div>
-        <div id="boxCardsProduct" class="row">
-            <div class="card m-3">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
+            <div class="row d-flex justify-content-end p-3">
+                <div id="backwaring" class="btn btn-primary">Back</div>
             </div>
-        </div>
-        <div class="row mt-3 d-flex justify-content-center">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <div id="previousHome" class="page-link">Previous</div>
-                    <div id="pagingHome" class="d-flex flex-row">
-                        <li class="page-item">
-                            <div class="page-link">1/6</div>
-                        </li>
-                    </div>
-                    <div id="nextHome" class="page-link">Next</div>
-                </ul>
-            </nav>
-        </div>
-    </div>
-
-    <!-- form login -->
-    <div id="formlogin" class="container w-50 mt-3">
-        <form class="d-flex flex-column">
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email</label>
-                <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
-            </div>
-            <div id="btnLogin" class="btn btn-primary d-flex justify-content-center">Login</div>
         </form>
-    </div>
 
-    <!-- form my profile -->
-    <div id="formmyprofile" class="container mt-3 w-50">
-        <form class="d-flex flex-column">
+        <!-- form delete user -->
+        <form id="formdelete" class="position-absolute form-delete bg-secondary p-3 w-25">
+            <div class="row text-center">
+                <h6 class="w-100 text-white">Xác nhận xóa?</h6>
+            </div>
+            <div class="row d-flex justify-content-between p-3">
+                <div id="backdelete" class="btn btn-primary">No</div>
+                <div id="btnDeleteUser" class="btn btn-danger">Yes</div>
+            </div>
+        </form>
+
+        <!-- form delete product -->
+        <form id="formdeleteproduct" class="position-absolute form-delete bg-secondary p-3 w-25">
+            <div class="row text-center">
+                <h6 class="w-100 text-white">Xác nhận xóa?</h6>
+            </div>
+            <div class="row d-flex justify-content-between p-3">
+                <div id="backdeleteproduct" class="btn btn-primary">No</div>
+                <div id="btnConfirmDelete" class="btn btn-danger">Yes</div>
+            </div>
+        </form>
+
+        <!-- form save user-->
+        <form id="formsaveuser" class="position-absolute form-save bg-secondary p-3 w-25 text-white">
             <div class="form-group">
                 <label for="exampleInputEmail1">UserName</label>
-                <input id="usernameinfor" class="form-control" placeholder="Nhập UserName">
+                <input class="form-control" id="username" aria-describedby="emailHelp" placeholder="Nhập username">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email</label>
+                <input class="form-control" id="email" aria-describedby="emailHelp" placeholder="Nhập email">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
-                <input id="passwordinfor" type="password" class="form-control" placeholder="Nhập password">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Confirm password</label>
-                <input id="passwordconfirminfor" type="password" class="form-control" placeholder="Nhập xác nhận password">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Email</label>
-                <input id="emailinfor" type="email" readonly class="form-control">
+                <input type="password" class="form-control" id="password" placeholder="Nhập password">
             </div>
             <label for="exampleInputPassword1">Type user</label>
             <div class="dropdown">
-                <div class="btn btn-secondary dropdown-toggle" id="dropdowntypeuser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="btn btn-info dropdown-toggle" id="typeSave" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Admin
                 </div>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <div id="typeadmin" class="dropdown-item">Admin</div>
-                    <div id="typeuser" class="dropdown-item">User</div>
+                    <div id="typeAdminSave" class="dropdown-item">Admin</div>
+                    <div id="typeUserSave" class="dropdown-item">User</div>
                 </div>
             </div>
             <div class="row d-flex justify-content-between p-3">
-                <div id="btnlogout" class="btn btn-primary">Logout</div>
-                <div id="btnUpdateInfor" class="btn btn-success">Update</div>
+                <div id="backaddedit" class="btn btn-primary">Back</div>
+                <div id="saveUser" class="btn btn-success">Save</div>
             </div>
         </form>
-    </div>
 
-    <!-- form list user -->
-    <div id="formlistuser" class="container mt-3">
-        <div class="row d-flex flex-row justify-content-between">
-            <div class="input-group mb-3 w-25">
-                <input id="valueFilterUserName" type="text" class="form-control" placeholder="Nhập tên UserName" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <!-- form save product-->
+        <form id="formsaveproduct" class="position-absolute form-save-product bg-secondary p-3 w-50 text-white">
+            <div class="form-group">
+                <label for="exampleInputEmail1">ProductName</label>
+                <input class="form-control" id="productname" placeholder="Nhập ProductName">
             </div>
-            <div class="input-group mb-3 w-25">
-                <input id="createAtUser" type="date" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Slug</label>
+                <input class="form-control" id="slug" placeholder="Nhập Slug">
+            </div>
+            <div id="shopCreate" class="dropdown">
+                <div id="dropdownShop" class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Chọn shop
+                </div>
+                <div id="shopProduct" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <div class="dropdown-item">A</div>
+                    <div class="dropdown-item">B</div>
+                    <div class="dropdown-item">C</div>
+                </div>
+            </div>
+            <div id="shopEdit" class="form-group">
+                <label for="exampleInputEmail1">Shop</label>
+                <input class="form-control" id="labelShopName" readonly>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">ProductDetail</label>
+                <input class="form-control" id="productdetail" placeholder="Nhập ProductDetail">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Price</label>
+                <input class="form-control" id="price" placeholder="Nhập Price">
             </div>
             <div class="dropdown">
-                <div class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Tất cả
+                <div id="dropdownTrendingProduct" class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Chọn trending
                 </div>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <div id="allUserFilter" class="dropdown-item">Tất cả</div>
-                    <div id="adminFilter" class="dropdown-item">Admin</div>
-                    <div id="userFilter" class="dropdown-item">User</div>
+                    <div id="hotTrendingSave" class="dropdown-item">Hot</div>
+                    <div id="normalTrendingSave" class="dropdown-item">Normal</div>
+                    <div id="lowTrendingSave" class="dropdown-item">Low</div>
                 </div>
             </div>
-            <div class="dropdown">
-                <div class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuStatus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Tất cả
-                </div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <div id="allStatusFilter" class="dropdown-item">Tất cả</div>
-                    <div id="notActive" class="dropdown-item">Chưa xóa</div>
-                    <div id="isActive" class="dropdown-item">Đã xóa</div>
+            <div class="mb-3">
+                <label class="form-label">Upload</label>
+                <input class="form-control" type="file" id="formFile">
+            </div>
+            <div class="row d-flex justify-content-between p-3">
+                <div id="backaddeditproduct" class="btn btn-primary">Back</div>
+                <div id="saveProduct" class="btn btn-success">Save</div>
+            </div>
+        </form>
+
+        <!-- toast message -->
+        <button id="toast-message" type="button" class="btn btn-success w-25 position-absolute toast-message text-left">Secondary</button>
+
+        <!-- content -->
+        <div class="container bg-dark">
+            <div class="row w-100">
+                <ul class="nav">
+                    <li class="nav-item text-white">
+                        <a class="nav-link active" id="home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="listuser">List User</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="shop">List Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="review">List Reviews</a>
+                    </li>
+                    <li class="nav-item" id="listproduct">
+                        <a class="nav-link">List Product</a>
+                    </li>
+                    <li class="nav-item" id="login">
+                        <a class="nav-link">Login</a>
+                    </li>
+                    <li class="nav-item" id="myprofile">
+                        <a class="nav-link">My Profile</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- form list shop -->
+        <div id="formlistshop" class="container mt-3">
+            <div class="row">
+                <h2>Danh sách shop</h2>
+            </div>
+            <div id="boxCardsShop" class="row">
+                <div class="card m-3">
+
                 </div>
             </div>
         </div>
-        <div class="row w-100 d-flex flex-row justify-content-center">
-            <div id="filterUser" class="btn btn-primary">Lọc</div>
-        </div>
-        <div class="row w-100 d-flex flex-row justify-content-end">
-            <div id="adduser" class="btn btn-success">Add User</div>
-        </div>
-        <div id="boxDataUser">
-            <div class="row mt-3 overflow-auto box-table">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">UserName</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Password</th>
-                            <th scope="col">Type</th>
-                            <th scope="col">CreatedAt</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Chức năng</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbodyUser">
-                        <tr>
-                            <td scope="row">1</td>
-                            <td>admin</td>
-                            <td>Admin@123gmail.com</td>
-                            <td>1234</td>
-                            <td>22-02-2023</td>
-                            <td>đã xóa</td>
-                            <td>
-                                <div id="edit" type="button" class="btn btn-secondary">Edit</div>
-                                <div id="delete" type="button" class="btn btn-danger">Delete</div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+
+        <!-- form home -->
+        <div id="formhome" class="container mt-3">
+            <div class="row">
+                <h2>Danh sách product</h2>
+            </div>
+            <div id="boxCardsProduct" class="row">
+                <div class="card m-3">
+
+                </div>
             </div>
             <div class="row mt-3 d-flex justify-content-center">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
-                        <div id="previousUser" class="page-link">Previous</div>
-                        <div id="paging" class="d-flex flex-row">
-                            <li class="page-item">
-                                <div class="page-link">1</div>
-                            </li>
-                        </div>
-                        <div id="nextUser" class="page-link">Next</div>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-        <div id="boxNullDataUser" class="row mt-3 overflow-auto box-table text-center align-content-center justify-content-center">
-            <h1 class="text-center">No Data</h1>
-        </div>
-    </div>
-
-    <!-- form list product  -->
-    <div id="formlistproduct" class="container mt-3">
-        <div class="row d-flex flex-row justify-content-start">
-            <div class="input-group mb-3 w-25">
-                <input id="valueFilterProductName" type="text" class="form-control" placeholder="Nhập tên sản phẩm">
-            </div>
-            <div class="dropdown ml-3 mr-3">
-                <div class="btn btn-secondary dropdown-toggle" type="button" id="dropdownTrending" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Tất cả
-                </div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <div id="allTrending" class="dropdown-item" href="#">Tất cả</div>
-                    <div id="hotTrending" class="dropdown-item" href="#">Hot</div>
-                    <div id="normalTrending" class="dropdown-item" href="#">Normal</div>
-                    <div id="lowTrending" class="dropdown-item" href="#">Low</div>
-                </div>
-            </div>
-            <div id="btnFilterProduct" class="btn btn-primary mb-3">Lọc</div>
-        </div>
-        <div class="row w-100 d-flex flex-row justify-content-end">
-            <div id="addproduct" class="btn btn-success">Add Product</div>
-        </div>
-        <div id="boxDataProduct">
-            <div class="row mt-3 overflow-auto box-table">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">ProductName</th>
-                            <th scope="col">Slug</th>
-                            <th scope="col">Shop</th>
-                            <th scope="col">ProductDetail</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Trending</th>
-                            <th scope="col">Image</th>
-                            <th scope="col">Chức năng</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbodyProduct">
-                        <tr>
-                            <td scope="row">1</td>
-                            <td>Product name</td>
-                            <td>Slug</td>
-                            <td>Shop name</td>
-                            <td>Product detail</td>
-                            <td>Price</td>
-                            <td>Trending</td>
-                            <td>
-                                <div class="text-center">
-                                    <img src="../image/download.jpg" class="rounded" alt="...">
-                                </div>
-                            </td>
-                            <td>
-                                <div id="editproduct" type="button" class="btn btn-secondary">Edit</div>
-                                <div id="deleteproduct" type="button" class="btn btn-danger">Delete</div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="row mt-3 d-flex justify-content-center">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <div id="previousProduct" class="page-link">Previous</div>
-                        <div id="pagingProduct" class="d-flex flex-row">
+                        <div id="previousHome" class="page-link">Previous</div>
+                        <div id="pagingHome" class="d-flex flex-row">
                             <li class="page-item">
                                 <div class="page-link">1/6</div>
                             </li>
                         </div>
-                        <div id="nextProduct" class="page-link">Next</div>
+                        <div id="nextHome" class="page-link">Next</div>
                     </ul>
                 </nav>
             </div>
         </div>
-        <div id="boxNullDataProduct" class="row mt-3 overflow-auto box-table text-center align-content-center justify-content-center">
-            <h1 class="text-center">No Data</h1>
+
+        <!-- form login -->
+        <div id="formlogin" class="container w-50 mt-3">
+            <form class="d-flex flex-column">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email</label>
+                    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div id="btnLogin" class="btn btn-primary d-flex justify-content-center">Login</div>
+            </form>
+        </div>
+
+        <!-- form my profile -->
+        <div id="formmyprofile" class="container mt-3 w-50">
+            <form class="d-flex flex-column">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">UserName</label>
+                    <input id="usernameinfor" class="form-control" placeholder="Nhập UserName">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input id="passwordinfor" type="password" class="form-control" placeholder="Nhập password">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Confirm password</label>
+                    <input id="passwordconfirminfor" type="password" class="form-control" placeholder="Nhập xác nhận password">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Email</label>
+                    <input id="emailinfor" type="email" readonly class="form-control">
+                </div>
+                <label for="exampleInputPassword1">Type user</label>
+                <div class="dropdown">
+                    <div class="btn btn-secondary dropdown-toggle" id="dropdowntypeuser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Admin
+                    </div>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <div id="typeadmin" class="dropdown-item">Admin</div>
+                        <div id="typeuser" class="dropdown-item">User</div>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-between p-3">
+                    <div id="btnlogout" class="btn btn-primary">Logout</div>
+                    <div id="btnUpdateInfor" class="btn btn-success">Update</div>
+                </div>
+            </form>
+        </div>
+
+        <!-- form list user -->
+        <div id="formlistuser" class="container mt-3">
+            <div class="row d-flex flex-row justify-content-between">
+                <div class="input-group mb-3 w-25">
+                    <input id="valueFilterUserName" type="text" class="form-control" placeholder="Nhập tên UserName" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                </div>
+                <div class="input-group mb-3 w-25">
+                    <input id="createAtUser" type="date" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                </div>
+                <div class="dropdown">
+                    <div class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Tất cả
+                    </div>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <div id="allUserFilter" class="dropdown-item">Tất cả</div>
+                        <div id="adminFilter" class="dropdown-item">Admin</div>
+                        <div id="userFilter" class="dropdown-item">User</div>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <div class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuStatus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Tất cả
+                    </div>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <div id="allStatusFilter" class="dropdown-item">Tất cả</div>
+                        <div id="notActive" class="dropdown-item">Chưa xóa</div>
+                        <div id="isActive" class="dropdown-item">Đã xóa</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row w-100 d-flex flex-row justify-content-center">
+                <div id="filterUser" class="btn btn-primary">Lọc</div>
+            </div>
+            <div class="row w-100 d-flex flex-row justify-content-end">
+                <div id="adduser" class="btn btn-success">Add User</div>
+            </div>
+            <div id="boxDataUser">
+                <div class="row mt-3 overflow-auto box-table">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">UserName</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Password</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">CreatedAt</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Chức năng</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyUser">
+                            <tr>
+                                <td scope="row">1</td>
+                                <td>admin</td>
+                                <td>Admin@123gmail.com</td>
+                                <td>1234</td>
+                                <td>22-02-2023</td>
+                                <td>đã xóa</td>
+                                <td>
+                                    <div id="edit" type="button" class="btn btn-secondary">Edit</div>
+                                    <div id="delete" type="button" class="btn btn-danger">Delete</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row mt-3 d-flex justify-content-center">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <div id="previousUser" class="page-link">Previous</div>
+                            <div id="paging" class="d-flex flex-row">
+                                <li class="page-item">
+                                    <div class="page-link">1</div>
+                                </li>
+                            </div>
+                            <div id="nextUser" class="page-link">Next</div>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div id="boxNullDataUser" class="row mt-3 overflow-auto box-table text-center align-content-center justify-content-center">
+                <h1 class="text-center">No Data</h1>
+            </div>
+        </div>
+
+        <!-- form list product  -->
+        <div id="formlistproduct" class="container mt-3">
+            <div class="row d-flex flex-row justify-content-start">
+                <div class="input-group mb-3 w-25">
+                    <input id="valueFilterProductName" type="text" class="form-control" placeholder="Nhập tên sản phẩm">
+                </div>
+                <div class="dropdown ml-3 mr-3">
+                    <div class="btn btn-secondary dropdown-toggle" type="button" id="dropdownTrending" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Tất cả
+                    </div>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <div id="allTrending" class="dropdown-item" href="#">Tất cả</div>
+                        <div id="hotTrending" class="dropdown-item" href="#">Hot</div>
+                        <div id="normalTrending" class="dropdown-item" href="#">Normal</div>
+                        <div id="lowTrending" class="dropdown-item" href="#">Low</div>
+                    </div>
+                </div>
+                <div id="btnFilterProduct" class="btn btn-primary mb-3">Lọc</div>
+            </div>
+            <div class="row w-100 d-flex flex-row justify-content-end">
+                <div id="addproduct" class="btn btn-success">Add Product</div>
+            </div>
+            <div id="boxDataProduct">
+                <div class="row mt-3 overflow-auto box-table">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">ProductName</th>
+                                <th scope="col">Slug</th>
+                                <th scope="col">Shop</th>
+                                <th scope="col">ProductDetail</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Trending</th>
+                                <th scope="col">Image</th>
+                                <th scope="col">Chức năng</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyProduct">
+                            <tr>
+                                <td scope="row">1</td>
+                                <td>Product name</td>
+                                <td>Slug</td>
+                                <td>Shop name</td>
+                                <td>Product detail</td>
+                                <td>Price</td>
+                                <td>Trending</td>
+                                <td>
+                                    <div class="text-center">
+                                        <img src="../image/download.jpg" class="rounded" alt="...">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="editproduct" type="button" class="btn btn-secondary">Edit</div>
+                                    <div id="deleteproduct" type="button" class="btn btn-danger">Delete</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row mt-3 d-flex justify-content-center">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <div id="previousProduct" class="page-link">Previous</div>
+                            <div id="pagingProduct" class="d-flex flex-row">
+                                <li class="page-item">
+                                    <div class="page-link">1/6</div>
+                                </li>
+                            </div>
+                            <div id="nextProduct" class="page-link">Next</div>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div id="boxNullDataProduct" class="row mt-3 overflow-auto box-table text-center align-content-center justify-content-center">
+                <h1 class="text-center">No Data</h1>
+            </div>
         </div>
     </div>
 </body>
