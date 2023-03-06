@@ -5,6 +5,7 @@ $(document).ready(function() {
 class Index {
     URL_API = "https://app.somee.com";
     UserId = 0;
+    ShopId = 0;
     Mode = "";
     PageNumber = 1;
     PageSizeUser = 10;
@@ -201,17 +202,9 @@ class Index {
         })
     }
 
-    pagings(pagenumber, totalPage) {
-        let numShown = 3;
-        numShown = Math.min(numShown, totalPage);
-        let first = pagenumber - Math.floor(numShown / 2);
-        first = Math.max(first, 1);
-        first = Math.min(first, totalPage - numShown + 1);
-        return [...Array(numShown)].map((k, i) => i + first);
-    }
-
     convertDate(value) {
         let dateOfBirth = new Date(value);
+        dateOfBirth.setHours(dateOfBirth.getHours() + 7);
         let date = dateOfBirth.getDate();
         let month = dateOfBirth.getMonth() + 1;
         let year = dateOfBirth.getFullYear();
@@ -400,11 +393,11 @@ class Index {
         $("#saveProduct").click(function() {
             const productName = $('#productname').val();
             const slug = $('#slug').val();
-            const shopId = $(".itemShop").data('id');
+            const shopId = m.ShopId;
             const productDetail = $('#productdetail').val();
             const price = $('#price').val();
             const trending = m.convertTypeTrending($('#dropdownTrendingProduct').text());
-            const upload = $('#formFile').prop("files")[0];
+            const file = $('#formFile')[0].files[0];
 
             debugger
             let product = {
@@ -414,7 +407,7 @@ class Index {
                 "ProductDetail": productDetail,
                 "Price": price,
                 "Trending": trending,
-                "Upload": upload
+                "File": file
             }
 
             debugger
@@ -426,8 +419,8 @@ class Index {
                     url: `${m.URL_API}/api/Products`,
                     data: formData,
                     processData: false,
-                    async: false,
                     contentType: false,
+                    async: false,
                     success: function(response) {
                         m.loadDataProduct();
                         $('#toast-message').empty();
@@ -458,7 +451,6 @@ class Index {
                     type: "PUT",
                     url: `${m.URL_API}/api/Products/${m.ProductIdSelected}`,
                     data: formData,
-                    async: false,
                     processData: false,
                     contentType: false,
                     success: function(response) {
@@ -684,7 +676,7 @@ class Index {
             $('#username').val("");
             $('#password').val("");
             $('#email').val("");
-            $('#typeSave').text("Chọn type user");
+            $('#typeSave').text("User");
         })
     }
 
@@ -755,6 +747,8 @@ class Index {
         var m = this;
         $('#shopProduct').on('click', '.itemShop', function() {
             $("#dropdownShop").text($(this).text());
+
+            m.ShopId = $(this).closest('[data-id]').data('id');
         });
     }
 
@@ -850,7 +844,7 @@ class Index {
             $('#slug').val("");
             $('#productdetail').val("");
             $('#price').val("");
-            $('#dropdownTrendingProduct').text("Chọn trending");
+            $('#dropdownTrendingProduct').text("Low");
         })
     }
 
@@ -873,6 +867,12 @@ class Index {
                     $("#price").val(response.Data.Price);
                     $("#dropdownTrendingProduct").empty();
                     $('#dropdownTrendingProduct').append(m.convertTypeTrendingToEnum(response.Data.Trending));
+
+                    const formData = new FormData();
+                    formData.append('Upload', response.Data.Upload);
+                    $("#fromFile").val(formData);
+
+                    debugger
                 },
                 error: function(res) {
                     if (res.responseJSON.StatusCode == 404) {
@@ -980,7 +980,9 @@ class Index {
 
     clickBtnFilterUser() {
         var m = this;
+
         $("#filterUser").click(function() {
+            m.PageNumber = 1;
             m.loadDataUser();
 
             $('#toast-message').empty();
@@ -996,6 +998,7 @@ class Index {
     clickBtnFilterProduct() {
         var m = this;
         $("#btnFilterProduct").click(function() {
+            m.PageNumberProduct = 1;
             m.loadDataProduct();
 
             $('#toast-message').empty();
@@ -1066,7 +1069,7 @@ class Index {
 
                     for (const user of users) {
                         let trHTML = $(`<tr>
-                            <th scope="row">${user.UserId}</th>
+                            <td scope="row">${user.UserId}</td>
                             <td>${user.UserName}</td>
                             <td>${user.Email}</td>
                             <td>${m.hidePassword(atob(user.Password))}</td>
@@ -1081,16 +1084,11 @@ class Index {
                         $('#tbodyUser').append(trHTML);
                     }
 
-                    var pages = m.pagings(m.PageNumber, m.TotalPageUser);
-
                     $('#paging').empty();
-                    for (const page of pages) {
-                        let trHTML = $(`<li class="page-item">
-                            <div class="page-link pageActive" data-id="${page}">${page}</div>
+                    let trHTML = $(`<li class="page-item">
+                            <div class="page-link">${m.PageNumber}/${m.TotalPageUser}</div>
                         </li>`);
-                        $('#paging').append(trHTML);
-                    }
-
+                    $('#paging').append(trHTML);
                 }
             },
             error: function(res) {
@@ -1136,12 +1134,12 @@ class Index {
 
                     for (const product of products) {
                         let trHTML = $(`<tr>
-                            <th scope="row">${product.ProductId}</th>
+                            <td scope="row">${product.ProductId}</td>
                             <td>${product.ProductName}</td>
                             <td>${product.Slug}</td>
                             <td>${m.getShopNameById(product.ShopId)}</td>
                             <td>${product.ProductDetail}</td>
-                            <td>${product.Price}</td>
+                            <td>${product.Price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</td>
                             <td>${m.convertTypeTrendingToEnum(product.Trending)}</td>
                             <td>
                                 <div class="text-center">
@@ -1156,16 +1154,11 @@ class Index {
                         $('#tbodyProduct').append(trHTML);
                     }
 
-                    var pageProducts = m.pagings(m.PageNumberProduct, m.TotalPageProduct);
-
                     $('#pagingProduct').empty();
-                    for (const pageProduct of pageProducts) {
-                        let trHTML = $(`<li class="page-item">
-                            <div class="page-link pageActiveProduct" data-id="${pageProduct}">${pageProduct}</div>
+                    let trHTML = $(`<li class="page-item">
+                            <div class="page-link">${m.PageNumberProduct}/${m.TotalPageProduct}</div>
                         </li>`);
-                        $('#pagingProduct').append(trHTML);
-                    }
-
+                    $('#pagingProduct').append(trHTML);
                 }
             },
             error: function(res) {
