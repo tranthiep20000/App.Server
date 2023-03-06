@@ -32,6 +32,7 @@ class Index {
         $('#formwarning').hide();
         $('#myprofile').hide();
         $("#boxNullDataUser").hide();
+        $("#formlistshop").hide();
         // event
         this.initEvents();
         this.loadDataUser();
@@ -47,6 +48,8 @@ class Index {
         this.clickLinkMyProflie();
 
         this.clickLinkHome();
+
+        this.clickLinkListShop();
 
         this.clickLinkListUser();
 
@@ -99,6 +102,10 @@ class Index {
         this.clickBtnNextProduct();
 
         this.clickBtnPreviousProduct();
+
+        this.clickBtnNextHome();
+
+        this.clickBtnPreviousHome();
 
         this.clickBtnItemShop();
 
@@ -392,7 +399,6 @@ class Index {
             const trending = m.convertTypeTrending($('#dropdownTrendingProduct').text());
             const file = $('#formFile')[0].files[0];
 
-            debugger
             let product = {
                 "ProductName": productName,
                 "Slug": slug,
@@ -403,7 +409,6 @@ class Index {
                 "File": file
             }
 
-            debugger
             let formData = m.convertJsonToFormData(product);
 
             if (m.Mode == 'add') {
@@ -618,6 +623,7 @@ class Index {
             $("#formlistuser").hide();
             $("#formlistproduct").hide();
             $("#formmyprofile").hide();
+            $("#formlistshop").hide();
         })
     }
 
@@ -628,6 +634,7 @@ class Index {
             $("#formhome").hide();
             $("#formlistuser").hide();
             $("#formlistproduct").hide();
+            $("#formlistshop").hide();
         })
     }
 
@@ -638,6 +645,7 @@ class Index {
             $("#formlistuser").hide();
             $("#formlistproduct").hide();
             $("#formmyprofile").hide();
+            $("#formlistshop").hide();
         })
     }
 
@@ -646,6 +654,18 @@ class Index {
             $("#formlistuser").show();
             $("#formlogin").hide();
             $("#formhome").hide();
+            $("#formlistproduct").hide();
+            $("#formmyprofile").hide();
+            $("#formlistshop").hide();
+        })
+    }
+
+    clickLinkListShop() {
+        $("#shop").click(function() {
+            $("#formlistshop").show();
+            $("#formlogin").hide();
+            $("#formhome").hide();
+            $("#formlistuser").hide();
             $("#formlistproduct").hide();
             $("#formmyprofile").hide();
         })
@@ -658,6 +678,7 @@ class Index {
             $("#formlogin").hide();
             $("#formhome").hide();
             $("#formmyprofile").hide();
+            $("#formlistshop").hide();
         })
     }
 
@@ -774,6 +795,20 @@ class Index {
         })
     }
 
+    clickBtnNextHome() {
+        var m = this;
+        $("#nextHome").click(function() {
+            if (m.PageNumberProduct < m.TotalPageProduct) {
+                m.PageNumberProduct++;
+                m.loadDataProduct();
+            } else {
+                $('#box-message-warning').empty();
+                $('#box-message-warning').append("Đã đến trang cuối cùng");
+                $('#formwarning').show();
+            }
+        })
+    }
+
     clickBtnPrevious() {
         var m = this;
         $("#previousUser").click(function() {
@@ -791,6 +826,20 @@ class Index {
     clickBtnPreviousProduct() {
         var m = this;
         $("#previousProduct").click(function() {
+            if (m.PageNumberProduct > 1) {
+                m.PageNumberProduct--;
+                m.loadDataProduct();
+            } else {
+                $('#box-message-warning').empty();
+                $('#box-message-warning').append("Đã đến trang đầu tiên");
+                $('#formwarning').show();
+            }
+        })
+    }
+
+    clickBtnPreviousHome() {
+        var m = this;
+        $("#previousHome").click(function() {
             if (m.PageNumberProduct > 1) {
                 m.PageNumberProduct--;
                 m.loadDataProduct();
@@ -832,6 +881,8 @@ class Index {
         var m = this;
         $("#addproduct").click(function() {
             $("#formsaveproduct").show();
+            $("#shopCreate").show();
+            $("#shopEdit").hide();
             m.Mode = "add";
 
             $('#productname').val("");
@@ -847,6 +898,8 @@ class Index {
         $('#tbodyProduct').on('click', '.btnEditProduct', function() {
             m.ProductIdSelected = $(this).data('id1');
             $("#formsaveproduct").show();
+            $("#shopCreate").hide();
+            $("#shopEdit").show();
             m.Mode = "edit";
 
             $.ajax({
@@ -855,8 +908,8 @@ class Index {
                 success: function(response) {
                     $("#productname").val(response.Data.ProductName);
                     $("#slug").val(response.Data.Slug);
-                    $("#dropdownShop").empty();
-                    $('#dropdownShop').append(m.getShopNameById(response.Data.ShopId));
+                    m.ShopId = response.Data.ShopId;
+                    $("#labelShopName").val(m.getShopNameById(response.Data.ShopId));
                     $("#productdetail").val(response.Data.ProductDetail);
                     $("#price").val(response.Data.Price);
                     $("#dropdownTrendingProduct").empty();
@@ -865,8 +918,6 @@ class Index {
                     const formData = new FormData();
                     formData.append('Upload', response.Data.Upload);
                     $("#fromFile").val(formData);
-
-                    debugger
                 },
                 error: function(res) {
                     if (res.responseJSON.StatusCode == 404) {
@@ -939,7 +990,6 @@ class Index {
         var m = this;
 
         $("#btnConfirmDelete").click(function() {
-            debugger
             $.ajax({
                 type: "DELETE",
                 url: `${m.URL_API}/api/Products/${m.ProductIdSelected}`,
@@ -1166,6 +1216,12 @@ class Index {
                             <div class="page-link">${m.PageNumberProduct}/${m.TotalPageProduct}</div>
                         </li>`);
                     $('#pagingProduct').append(trHTML);
+
+                    $('#pagingHome').empty();
+                    let trhome = $(`<li class="page-item">
+                            <div class="page-link">${m.PageNumberProduct}/${m.TotalPageProduct}</div>
+                        </li>`);
+                    $('#pagingHome').append(trhome);
                 }
             },
             error: function(res) {
@@ -1196,9 +1252,21 @@ class Index {
             success: function(response) {
                 shops = response.Data;
                 $('#shopProduct').empty();
+                $('#boxCardsShop').empty();
                 for (const shop of shops) {
                     let trHTML = $(`<div class="dropdown-item itemShop" data-id="${shop.ShopId}">${shop.ShopName}</div>`);
                     $('#shopProduct').append(trHTML);
+
+                    let divHTML = $(`
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Id shop: ${shop.ShopId}</h5>
+                                <h5 class="card-title">Tên shop: ${shop.ShopName}</h5>
+                            </div>
+                        </div>
+                    `);
+                    $('#boxCardsShop').append(divHTML);
+
                 }
             },
             error: function(res) {
