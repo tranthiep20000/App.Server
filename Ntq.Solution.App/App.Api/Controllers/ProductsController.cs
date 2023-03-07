@@ -6,8 +6,6 @@ using App.Domain.Enum;
 using App.Domain.Interfaces.IRepositories;
 using App.Domain.Interfaces.IServices;
 using AutoMapper;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
@@ -40,18 +38,18 @@ namespace App.Api.Controllers
             _mapper = mapper;
         }
 
-        /// <summary>
-        /// Get all product
-        /// </summary>
-        /// <returns>IActionResult</returns>
-        /// CreatedBy: ThiepTT(27/02/2023)
-        [HttpGet]
-        public async Task<IActionResult> GetAllProduct()
-        {
-            var result = await _productRepository.GetAll();
+         /// <summary>
+         /// Get all product
+         /// </summary>
+         /// <returns>IActionResult</returns>
+         /// CreatedBy: ThiepTT(27/02/2023)
+         [HttpGet]
+         public async Task<IActionResult> GetAllProduct()
+         {
+             var result = await _productRepository.GetAll();
 
-            return (result.IsError) ? HandlerErrorResponse(result.ErrorData) : Ok(result);
-        }
+             return (result.IsError) ? HandlerErrorResponse(result.ErrorData) : Ok(result);
+         }
 
         /// <summary>
         /// Get all paging product
@@ -63,7 +61,7 @@ namespace App.Api.Controllers
         /// <returns>IActionResult</returns>
         /// CreatedBy: ThiepTT(27/02/2023)
         [HttpGet]
-        [Route("GetAllPagingProduct")]
+        [Route(ApiRouter.Product.GETALLPAGINGPRODUCT)]
         public async Task<IActionResult> GetAllPagingProduct(string? valueFilter, TrendingEnum? trendingEnum, int pageNumber,
             int pageSize = 15)
         {

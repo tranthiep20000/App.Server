@@ -21,115 +21,13 @@ namespace App.Application.Services
         }
 
         /// <summary>
-        /// Create a record
-        /// </summary>
-        /// <param name="user">User</param>
-        /// <returns>Number record create success</returns>
-        /// CreatedBy: ThiepTT(27/02/2022)
-        public async Task<OperationResult<int>> Create(User user)
-        {
-            var result = new OperationResult<int>();
-
-            // 1. username is null
-            if (string.IsNullOrWhiteSpace(user.UserName))
-            {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYNAMENOTEMPTY);
-
-                return result;
-            }
-
-            // get userByUserName
-            var userByUserName = await _userRepository.GetByUserName(user.UserName);
-
-            // 2. username is already exist
-            if (userByUserName.Data is not null)
-            {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYNAMEALREADYEXIST);
-
-                return result;
-            }
-
-            // 3. check length username
-            if (user.UserName.Length < ConfigErrorMessageService.LENGTHMINCHARACTEROFUSERNAME
-                || user.UserName.Length > ConfigErrorMessageService.LENGTHMAXCHARACTEROFUSERNAME)
-            {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYCHARACTER);
-
-                return result;
-            }
-
-            // 4. password is null
-            if (string.IsNullOrWhiteSpace(user.Password))
-            {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYPASSWORDNOTEMPTY);
-
-                return result;
-            }
-
-            // 5. check password
-            if (!IsPasswordValid(user.Password))
-            {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYPASSWORD);
-
-                return result;
-            }
-
-            // 6. email is null
-            if (string.IsNullOrWhiteSpace(user.Email))
-            {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYEMAILNOTEMPTY);
-
-                return result;
-            }
-
-            // get userByEmail
-            var userByEmail = await _userRepository.GetByEmail(user.Email);
-
-            // 7. email is already exist
-            if (userByEmail.Data is not null)
-            {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYEMAILALREADYEXIST);
-
-                return result;
-            }
-
-            // 8. check email
-            if (!IsEmailValid(user.Email))
-            {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYEMAILFORMAT);
-
-                return result;
-            }
-
-            // 9. check length email
-            if (user.Email.Length < ConfigErrorMessageService.LENGTHMINCHARACTEROFEMAIL
-                || user.Email.Length > ConfigErrorMessageService.LENGTHMAXCHARACTEROFEMAIL)
-            {
-                result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYEMAILCHARACTER);
-
-                return result;
-            }
-
-            try
-            {
-                result = await _userRepository.Create(user);
-            }
-            catch (Exception ex)
-            {
-                result.AddError(ErrorCode.ServerError, $"{ex.Message}");
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Update a record
+        /// Validate
         /// </summary>
         /// <param name="user">User</param>
         /// <param name="id">Id</param>
-        /// <returns>Number record delete success</returns>
-        /// CreatedBy: ThiepTT(27/02/2022)
-        public async Task<OperationResult<int>> Update(User user, int id)
+        /// <returns>int</returns>
+        /// CreatedBy: ThiepTT(07/03/2023)
+        protected override async Task<OperationResult<int>> Validate(User user, int id)
         {
             var result = new OperationResult<int>();
 
@@ -144,16 +42,29 @@ namespace App.Application.Services
             // get userByUserName
             var userByUserName = await _userRepository.GetByUserName(user.UserName);
 
-            // 2. username is already exist
-            if (userByUserName.Data is not null)
+            if (id == 0)
             {
-                // 2.1 username is already exist
-                if (userByUserName.Data.Email.ToLower().Trim().Equals(user.UserName.ToLower().Trim())
-                    && userByUserName.Data.UserId != id)
+                // 2. username is already exist
+                if (userByUserName.Data is not null)
                 {
                     result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYNAMEALREADYEXIST);
 
                     return result;
+                }
+            } 
+            else
+            {
+                // 2. username is already exist
+                if (userByUserName.Data is not null)
+                {
+                    // 2.1 username is already exist
+                    if (userByUserName.Data.Email.ToLower().Trim().Equals(user.UserName.ToLower().Trim())
+                        && userByUserName.Data.UserId != id)
+                    {
+                        result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYNAMEALREADYEXIST);
+
+                        return result;
+                    }
                 }
             }
 
@@ -193,18 +104,31 @@ namespace App.Application.Services
             // get userByEmail
             var userByEmail = await _userRepository.GetByEmail(user.Email);
 
-            // 7. email is already exist
-            if (userByEmail.Data is not null)
+            if (id == 0)
             {
-                // 7.1 Email is already exist
-                if (userByEmail.Data.Email.ToLower().Trim().Equals(user.Email.ToLower().Trim())
-                    && userByEmail.Data.UserId != id)
+                // 7. email is already exist
+                if (userByEmail.Data is not null)
                 {
                     result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYEMAILALREADYEXIST);
 
                     return result;
                 }
             }
+            else
+            {
+                // 7. email is already exist
+                if (userByEmail.Data is not null)
+                {
+                    // 7.1 Email is already exist
+                    if (userByEmail.Data.Email.ToLower().Trim().Equals(user.Email.ToLower().Trim())
+                        && userByEmail.Data.UserId != id)
+                    {
+                        result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYEMAILALREADYEXIST);
+
+                        return result;
+                    }
+                }
+            }
 
             // 8. check email
             if (!IsEmailValid(user.Email))
@@ -221,15 +145,6 @@ namespace App.Application.Services
                 result.AddError(ErrorCode.NotFound, ConfigErrorMessageService.USERBYEMAILCHARACTER);
 
                 return result;
-            }
-
-            try
-            {
-                result = await _userRepository.Update(user, id);
-            }
-            catch (Exception ex)
-            {
-                result.AddError(ErrorCode.ServerError, $"{ex.Message}");
             }
 
             return result;

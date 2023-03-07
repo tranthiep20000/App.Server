@@ -15,11 +15,8 @@ namespace App.DAL.Repositories
     /// </summary>
     public class ProductRepository : BaseRepository<Product>, IProductRepository
     {
-        private readonly DataContext _dataContext;
-
         public ProductRepository(DataContext dataContext) : base(dataContext)
         {
-            _dataContext = dataContext;
         }
 
         /// <summary>

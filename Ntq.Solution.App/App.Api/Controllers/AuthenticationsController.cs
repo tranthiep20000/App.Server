@@ -38,7 +38,7 @@ namespace App.Api.Controllers
         /// <returns>IActionResult</returns>
         /// CreatedBy: ThiepTT(28/02/2023)
         [HttpPost]
-        [Route("LoginForEmail")]
+        [Route(ApiRouter.Authentication.LOGINFOREMAIL)]
         public async Task<IActionResult> LoginForEmail([FromBody] UserEmailPassword userEmailPassword)
         {
             var user = _mapper.Map<User>(userEmailPassword);

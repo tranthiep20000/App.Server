@@ -19,12 +19,10 @@ namespace App.DAL.Repositories
     /// </summary>
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
-        private readonly DataContext _dataContext;
         private readonly IdentityService _identityService;
 
         public UserRepository(DataContext dataContext, IdentityService identityService) : base(dataContext)
         {
-            _dataContext = dataContext;
             _identityService = identityService;
         }
 

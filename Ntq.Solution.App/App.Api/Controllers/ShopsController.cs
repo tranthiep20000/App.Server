@@ -5,8 +5,6 @@ using App.Domain.Entities;
 using App.Domain.Interfaces.IRepositories;
 using App.Domain.Interfaces.IServices;
 using AutoMapper;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
@@ -32,7 +30,7 @@ namespace App.Api.Controllers
         /// <param name="shopRepository">shopRepository</param>
         /// <param name="shopService">shopService</param>
         /// <param name="mapper">mapper</param>
-        public ShopsController(IShopRepository shopRepository, IShopService shopService, IMapper mapper)
+        public ShopsController(IShopRepository shopRepository, IShopService shopService, IMapper mapper) 
         {
             _shopRepository = shopRepository;
             _shopService = shopService;

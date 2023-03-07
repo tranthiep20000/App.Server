@@ -961,6 +961,8 @@ class Index {
             $("#formlogin").show();
             $("#formmyprofile").hide();
             $("#myprofile").hide();
+            $("#headerAdmin").show();
+            $("#headerUser").hide();
         })
     }
 

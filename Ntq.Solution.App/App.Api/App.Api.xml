@@ -4,6 +4,32 @@
         <name>App.Api</name>
     </assembly>
     <members>
+        <member name="T:App.Api.Contracts.Common.ErrorResponse">
+            <summary>
+            Information of ErrorResponse
+            CreatedBy: ThiepTT(02/03/2023)
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.Common.ErrorResponse.StatusCode">
+            <summary>
+            StatusCode
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.Common.ErrorResponse.StatusPhrase">
+            <summary>
+            StatusPhrase
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.Common.ErrorResponse.Errors">
+            <summary>
+            Errors
+            </summary>
+        </member>
+        <member name="P:App.Api.Contracts.Common.ErrorResponse.TimeStamp">
+            <summary>
+            TimeStamp
+            </summary>
+        </member>
         <member name="T:App.Api.Contracts.Common.SystemConfig">
             <summary>
             Information of SystemConfig
@@ -498,6 +524,46 @@
             CreatedBy: ThiepTT(27/02/2023)
             </summary>
         </member>
+        <member name="F:App.Api.Options.ApiRouter.ROUTER">
+            <summary>
+            ROUTER
+            </summary>
+        </member>
+        <member name="F:App.Api.Options.ApiRouter.ID">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="T:App.Api.Options.ApiRouter.User">
+            <summary>
+            User
+            </summary>
+        </member>
+        <member name="F:App.Api.Options.ApiRouter.User.GETALLPAGINGUSER">
+            <summary>
+            GETALLPAGINGUSER
+            </summary>
+        </member>
+        <member name="T:App.Api.Options.ApiRouter.Product">
+            <summary>
+            Product
+            </summary>
+        </member>
+        <member name="F:App.Api.Options.ApiRouter.Product.GETALLPAGINGPRODUCT">
+            <summary>
+            GETALLPAGINGPRODUCT
+            </summary>
+        </member>
+        <member name="T:App.Api.Options.ApiRouter.Authentication">
+            <summary>
+            Authentication
+            </summary>
+        </member>
+        <member name="F:App.Api.Options.ApiRouter.Authentication.LOGINFOREMAIL">
+            <summary>
+            LOGINFOREMAIL
+            </summary>
+        </member>
         <member name="T:App.Api.Options.ConfiguraSwagerOption">
             <summary>
             Information of ConfiguraSwagerOption
@@ -543,11 +609,25 @@
             CreatedBy: ThiepTT(27/02/2023)
             </summary>
         </member>
+        <member name="M:App.Api.Registrars.IWebApplicationBuilderRegistrar.RegisterServices(Microsoft.AspNetCore.Builder.WebApplicationBuilder)">
+            <summary>
+            RegisterServices
+            </summary>
+            <param name="builder">WebApplicationBuilder</param>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
         <member name="T:App.Api.Registrars.IWebApplicationRegistrar">
             <summary>
             Information of IWebApplicationRegistrar
             CreatedBy: ThiepTT(27/02/2023)
             </summary>
+        </member>
+        <member name="M:App.Api.Registrars.IWebApplicationRegistrar.RegisterPipelineConponents(Microsoft.AspNetCore.Builder.WebApplication)">
+            <summary>
+            RegisterPipelineConponents
+            </summary>
+            <param name="app">WebApplication</param>
+            CreatedBy: ThiepTT(27/02/2023)
         </member>
         <member name="T:App.Api.Registrars.RepositoryRegistrar">
             <summary>
@@ -555,11 +635,25 @@
             CreatedBy: ThiepTT(27/02/2023)
             </summary>
         </member>
+        <member name="M:App.Api.Registrars.RepositoryRegistrar.RegisterServices(Microsoft.AspNetCore.Builder.WebApplicationBuilder)">
+            <summary>
+            RegisterServices
+            </summary>
+            <param name="builder">WebApplicationBuilder</param>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
         <member name="T:App.Api.Registrars.ServiceRegistrar">
             <summary>
             Information of RepositoryRegistrar
             CreatedBy: ThiepTT(27/02/2023)
             </summary>
+        </member>
+        <member name="M:App.Api.Registrars.ServiceRegistrar.RegisterServices(Microsoft.AspNetCore.Builder.WebApplicationBuilder)">
+            <summary>
+            RegisterServices
+            </summary>
+            <param name="builder">WebApplicationBuilder</param>
+            CreatedBy: ThiepTT(27/02/2023)
         </member>
         <member name="T:App.Api.Registrars.WebApplicationBuilderRegistrar">
             <summary>
@@ -567,11 +661,25 @@
             CreatedBy: ThiepTT(27/02/2023)
             </summary>
         </member>
+        <member name="M:App.Api.Registrars.WebApplicationBuilderRegistrar.RegisterServices(Microsoft.AspNetCore.Builder.WebApplicationBuilder)">
+            <summary>
+            RegisterServices
+            </summary>
+            <param name="builder">WebApplicationBuilder</param>
+            CreatedBy: ThiepTT(27/02/2023)
+        </member>
         <member name="T:App.Api.Registrars.WebApplicationRegistrar">
             <summary>
             Information of WebApplicationRegistrar
             CreatedBy: ThiepTT(27/02/2023)
             </summary>
+        </member>
+        <member name="M:App.Api.Registrars.WebApplicationRegistrar.RegisterPipelineConponents(Microsoft.AspNetCore.Builder.WebApplication)">
+            <summary>
+            RegisterPipelineConponents
+            </summary>
+            <param name="app">WebApplication</param>
+            CreatedBy: ThiepTT(27/02/2023)
         </member>
         <member name="T:CwkSocial.API.MappingProfiles.UserProfileMapping">
             <summary>

@@ -6,8 +6,6 @@ using App.Domain.Enum;
 using App.Domain.Interfaces.IRepositories;
 using App.Domain.Interfaces.IServices;
 using AutoMapper;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
@@ -65,7 +63,7 @@ namespace App.Api.Controllers
         /// <returns>IActionResult</returns>
         /// CreatedBy: ThiepTT(27/02/2023)
         [HttpGet]
-        [Route("GetAllPagingUser")]
+        [Route(ApiRouter.User.GETALLPAGINGUSER)]
         public async Task<IActionResult> GetAllPagingUser(string? valueFilter, DateTime? createAt, TypeEnum? typeEnum,
             DeleteEnum? deleteEnum, int pageNumber, int pageSize = 10)
         {
