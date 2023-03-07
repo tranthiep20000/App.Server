@@ -11,8 +11,12 @@
 </head>
 
 <body>
-    <div id="loader" class="spinner-border" role="status">
-
+    <div id="loader">
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
     </div>
     <div id="content" class="position-relative" style="display:none;">
         <!-- form waring -->
@@ -139,18 +143,31 @@
                     <li class="nav-item text-white">
                         <a class="nav-link active" id="home">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="listuser">List User</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="shop">List Shop</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="review">List Reviews</a>
-                    </li>
-                    <li class="nav-item" id="listproduct">
-                        <a class="nav-link">List Product</a>
-                    </li>
+                    <ul class="nav" id="headerAdmin">
+                        <li class="nav-item">
+                            <a class="nav-link" id="listuser">List User</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="shop">List Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="review">List Reviews</a>
+                        </li>
+                        <li class="nav-item" id="listproduct">
+                            <a class="nav-link">List Product</a>
+                        </li>
+                    </ul>
+                    <ul class="nav" id="headerUser">
+                        <li class="nav-item">
+                            <a class="nav-link" id="product">Product</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="myReviews">My Reviews</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="myWishlists">My Wishlists</a>
+                        </li>
+                    </ul>
                     <li class="nav-item" id="login">
                         <a class="nav-link">Login</a>
                     </li>

@@ -1,6 +1,8 @@
+$(window).on('load', function() {
+    $("#loader").fadeOut("slow");
+    $("#content").fadeIn("slow");
+});
 $(document).ready(function() {
-    document.getElementById("loader").style.display = "none";
-    document.getElementById("content").style.display = "block";
     new Index();
 })
 
@@ -35,6 +37,8 @@ class Index {
         $('#myprofile').hide();
         $("#boxNullDataUser").hide();
         $("#formlistshop").hide();
+        $("#headerUser").hide();
+        $("#headerAdmin").show();
         // event
         this.initEvents();
         this.loadDataUser();
@@ -596,6 +600,14 @@ class Index {
                     m.UserId = jwt_decode(response.Data).UserId
 
                     m.getUserById(m.UserId, m);
+
+                    if (m.UserId == 2) {
+                        $('#headerUser').show();
+                        $('#headerAdmin').hide();
+                    } else {
+                        $('#headerUser').hide();
+                        $('#headerAdmin').show();
+                    }
 
                     $('#myprofile').show();
                     $('#formmyprofile').show();
