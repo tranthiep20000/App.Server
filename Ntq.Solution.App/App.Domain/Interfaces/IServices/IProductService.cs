@@ -8,7 +8,7 @@ namespace App.Domain.Interfaces.IServices
     /// Information of IProductService
     /// CreatedBy: ThiepTT(27/02/2023)
     /// </summary>
-    public interface IProductService : IBaseService<Product>
+    public interface IProductService : IBaseService<Product, int>
     {
     }
 }

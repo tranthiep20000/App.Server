@@ -6,7 +6,7 @@ namespace App.Domain.Interfaces.IServices
     /// Information of IShopService
     /// CreatedBy: ThiepTT(27/02/2023)
     /// </summary>
-    public interface IShopService : IBaseService<Shop>
+    public interface IShopService : IBaseService<Shop, int>
     {
     }
 }

@@ -6,9 +6,10 @@ namespace App.Domain.Interfaces.IRepositories
     /// Information of IBaseRepository
     /// </summary>
     /// <typeparam name="T">T</typeparam>
+    /// <typeparam name="K">K</typeparam>
     /// CreaetedBy: Thiep(27/02/2023)
     /// </summary>
-    public interface IBaseRepository<T>
+    public interface IBaseRepository<T, K>
     {
         /// <summary>
         /// Get all
@@ -20,10 +21,10 @@ namespace App.Domain.Interfaces.IRepositories
         /// <summary>
         /// Get by id
         /// </summary>
-        /// <param name="id">Id</param>
+        /// <param name="k">K</param>
         /// <returns>T</returns>
         /// CreaetedBy: Thiep(27/02/2023)
-        public Task<OperationResult<T>> GetById(int id);
+        public Task<OperationResult<T>> GetById(K k);
 
         /// <summary>
         /// Create a record
@@ -31,23 +32,23 @@ namespace App.Domain.Interfaces.IRepositories
         /// <param name="t">T</param>
         /// <returns>Number record create success</returns>
         /// CreaetedBy: Thiep(27/02/2023)
-        public Task<OperationResult<int>> Create(T t);
+        public Task<OperationResult<K>> Create(T t);
 
         /// <summary>
         /// Update a record
         /// </summary>
         /// <param name="t">T</param>
-        /// <param name="id">Id</param>
+        /// <param name="k">K</param>
         /// <returns>Number record update success</returns>
         /// CreaetedBy: Thiep(27/02/2023)
-        public Task<OperationResult<int>> Update(T t, int id);
+        public Task<OperationResult<K>> Update(T t, K k);
 
         /// <summary>
         /// Delete a record
         /// </summary>
-        /// <param name="id">Id</param>
+        /// <param name="k">K</param>
         /// <returns>Number record delete success</returns>
         /// CreaetedBy: Thiep(27/02/2023)
-        public Task<OperationResult<int>> Delete(int id);
+        public Task<OperationResult<K>> Delete(K k);
     }
 }

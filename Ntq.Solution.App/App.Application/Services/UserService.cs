@@ -11,7 +11,7 @@ namespace App.Application.Services
     /// Information of UserService
     /// CreatedBy: ThiepTT(27/02/2022)
     /// </summary>
-    public class UserService : BaseService<User>, IUserService
+    public class UserService : BaseService<User, int>, IUserService
     {
         private readonly IUserRepository _userRepository;
 

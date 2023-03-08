@@ -6,7 +6,7 @@ namespace App.Domain.Interfaces.IRepositories
     /// Information of IShopRepository
     /// CreatedBy: ThiepTT(27/02/2023)
     /// </summary>
-    public interface IShopRepository : IBaseRepository<Shop>
+    public interface IShopRepository : IBaseRepository<Shop, int>
     {
     }
 }

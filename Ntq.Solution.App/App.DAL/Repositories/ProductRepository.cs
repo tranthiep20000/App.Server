@@ -13,7 +13,7 @@ namespace App.DAL.Repositories
     /// Information of ProductRepository
     /// CreatedBy: ThiepTT(27/02/2023)
     /// </summary>
-    public class ProductRepository : BaseRepository<Product>, IProductRepository
+    public class ProductRepository : BaseRepository<Product, int>, IProductRepository
     {
         public ProductRepository(DataContext dataContext) : base(dataContext)
         {

@@ -7,7 +7,7 @@ namespace App.Domain.Interfaces.IServices
     /// Information of IUserService
     /// CreatedBy: ThiepTT(27/02/2023)
     /// </summary>
-    public interface IUserService : IBaseService<User>
+    public interface IUserService : IBaseService<User, int>
     {
         /// <summary>
         /// Login

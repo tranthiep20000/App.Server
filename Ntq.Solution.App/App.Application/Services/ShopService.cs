@@ -10,7 +10,7 @@ namespace App.Application.Services
     /// Information of ShopService
     /// CreatedBy: ThiepTT(27/02/2023)
     /// </summary>
-    public class ShopService : BaseService<Shop>, IShopService
+    public class ShopService : BaseService<Shop, int>, IShopService
     {
         public ShopService(IShopRepository shopRepository) : base(shopRepository)
         {

@@ -1,6 +1,5 @@
 ﻿using App.DAL.Data;
 using App.DAL.Repositories.Commom;
-using App.Domain.Entities;
 using App.Domain.Entities.Results;
 using App.Domain.Enum;
 using App.Domain.Interfaces.IRepositories;
@@ -14,7 +13,7 @@ namespace App.DAL.Repositories
     /// </summary>
     /// <typeparam name="T">T</typeparam>
     /// CreatedBy: ThiepTT(02/03/2023)
-    public class BaseRepository<T> : IBaseRepository<T> where T : class
+    public class BaseRepository<T, K> : IBaseRepository<T, K> where T : class
     {
         protected readonly DataContext _dataContext;
         protected readonly DbSet<T> _dbSet;
@@ -31,9 +30,9 @@ namespace App.DAL.Repositories
         /// <param name="entity">Entity</param>
         /// <returns>Number record create success</returns>
         /// CreatedBy: ThiepTT(02/03/2023)
-        public async Task<OperationResult<int>> Create(T entity)
+        public async Task<OperationResult<K>> Create(T entity)
         {
-            var result = new OperationResult<int>();
+            var result = new OperationResult<K>();
 
             var strategy = _dataContext.Database.CreateExecutionStrategy();
 
@@ -57,14 +56,14 @@ namespace App.DAL.Repositories
                             if (prop.Name == "Password")
                             {
                                 prop.SetValue(entity, Convert.ToBase64String(Encoding.ASCII.GetBytes(prop.GetValue(entity).ToString())));
-                            }    
+                            }
                         }
 
                         _dbSet.Add(entity);
-                        await _dataContext.SaveChangesAsync();
+                        var res = await _dataContext.SaveChangesAsync();
                         await transaction.CommitAsync();
 
-                        result.Data = 1;
+                        result.Data = (K)Convert.ChangeType(res, typeof(K));
                     }
                     catch (Exception ex)
                     {
@@ -83,9 +82,9 @@ namespace App.DAL.Repositories
         /// <param name="id">Id</param>
         /// <returns>Number record delete success</returns>
         /// CreatedBy: ThiepTT(02/03/2023)
-        public async Task<OperationResult<int>> Delete(int id)
+        public async Task<OperationResult<K>> Delete(K id)
         {
-            var result = new OperationResult<int>();
+            var result = new OperationResult<K>();
 
             var entity = await _dbSet.FindAsync(id);
 
@@ -121,10 +120,10 @@ namespace App.DAL.Repositories
                         }
 
                         _dbSet.Update(entity);
-                        await _dataContext.SaveChangesAsync();
+                        var res = await _dataContext.SaveChangesAsync();
                         await transaction.CommitAsync();
 
-                        result.Data = 1;
+                        result.Data = (K)Convert.ChangeType(res, typeof(K));
                     }
                     catch (Exception ex)
                     {
@@ -164,7 +163,7 @@ namespace App.DAL.Repositories
         /// <param name="id">Id</param>
         /// <returns>T</returns>
         /// CreatedBy: ThiepTT(02/03/2023)
-        public async Task<OperationResult<T>> GetById(int id)
+        public async Task<OperationResult<T>> GetById(K id)
         {
             var result = new OperationResult<T>();
 
@@ -197,9 +196,9 @@ namespace App.DAL.Repositories
         /// <param name="id">Id</param>
         /// <returns>Number record update success</returns>
         /// CreatedBy: ThiepTT(02/03/2023)
-        public async Task<OperationResult<int>> Update(T entity, int id)
+        public async Task<OperationResult<K>> Update(T entity, K id)
         {
-            var result = new OperationResult<int>();
+            var result = new OperationResult<K>();
 
             var entityById = await _dbSet.FindAsync(id);
 
@@ -244,10 +243,10 @@ namespace App.DAL.Repositories
                         }
 
                         _dbSet.Update(entityById);
-                        await _dataContext.SaveChangesAsync();
+                        var res = await _dataContext.SaveChangesAsync();
                         await transaction.CommitAsync();
 
-                        result.Data = 1;
+                        result.Data = (K)Convert.ChangeType(res, typeof(K));
                     }
                     catch (Exception ex)
                     {

@@ -8,12 +8,13 @@ namespace App.Application.Services
     /// Information of BaseService
     /// </summary>
     /// <typeparam name="T">T</typeparam>
+    /// <typeparam name="K">K</typeparam>
     /// CreatedBy: ThiepTT(02/03/2023)
-    public abstract class BaseService<T> : IBaseService<T> where T : class
+    public abstract class BaseService<T, K> : IBaseService<T, K> where T : class
     {
-        protected readonly IBaseRepository<T> _baseRepository;
+        protected readonly IBaseRepository<T, K> _baseRepository;
 
-        public BaseService(IBaseRepository<T> baseRepository)
+        public BaseService(IBaseRepository<T, K> baseRepository)
         {
             _baseRepository = baseRepository;
         }
@@ -21,12 +22,12 @@ namespace App.Application.Services
         /// <summary>
         /// Delete a record
         /// </summary>
-        /// <param name="id">Id</param>
+        /// <param name="K">Id</param>
         /// <returns>Number record delete success</returns>
         /// CreatedBy: ThiepTT(02/03/2023)
-        public async Task<OperationResult<int>> Delete(int id)
+        public async Task<OperationResult<K>> Delete(K id)
         {
-            var result = new OperationResult<int>();
+            var result = new OperationResult<K>();
 
             try
             {
@@ -46,12 +47,12 @@ namespace App.Application.Services
         /// <param name="t">T</param>
         /// <returns>Number record create success</returns>
         /// CreatedBy: ThiepTT(07/03/2023)
-        public async Task<OperationResult<int>> Create(T t)
+        public async Task<OperationResult<K>> Create(T t)
         {
-            var result = new OperationResult<int>();
+            var result = new OperationResult<K>();
 
             // Validate entity before saving
-            var validation = await Validate(t, 0);
+            var validation = await Validate(t, (K)Convert.ChangeType(0, typeof(K)));
 
             if (validation.IsError)
             {
@@ -77,9 +78,9 @@ namespace App.Application.Services
         /// <param name="id">Id</param>
         /// <returns>Number record update success</returns>
         /// CreatedBy: ThiepTT(07/03/2023)
-        public async Task<OperationResult<int>> Update(T t, int id)
+        public async Task<OperationResult<K>> Update(T t, K id)
         {
-            var result = new OperationResult<int>();
+            var result = new OperationResult<K>();
 
             // Validate entity before saving
             var validation = await Validate(t, id);
@@ -107,9 +108,9 @@ namespace App.Application.Services
         /// <param name="t">T</param>
         /// <returns>Int</returns>
         /// CreatedBy: ThiepTT(07/03/2023)
-        protected virtual async Task<OperationResult<int>> Validate(T t, int id)
+        protected virtual async Task<OperationResult<K>> Validate(T t, K id)
         {
-            var result = new OperationResult<int>();
+            var result = new OperationResult<K>();
 
             return result;
         }

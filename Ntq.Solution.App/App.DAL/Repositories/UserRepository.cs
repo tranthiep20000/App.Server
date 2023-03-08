@@ -17,7 +17,7 @@ namespace App.DAL.Repositories
     /// Information of UserRepository
     /// CreatedBy: ThiepTT(27/02/2023)
     /// </summary>
-    public class UserRepository : BaseRepository<User>, IUserRepository
+    public class UserRepository : BaseRepository<User, int>, IUserRepository
     {
         private readonly IdentityService _identityService;
 

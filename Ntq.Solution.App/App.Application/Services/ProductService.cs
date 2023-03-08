@@ -10,7 +10,7 @@ namespace App.Application.Services
     /// Information of ProductService
     /// CreatedBy: Thiep(27/02/2023)
     /// </summary>
-    public class ProductService : BaseService<Product>, IProductService
+    public class ProductService : BaseService<Product, int>, IProductService
     {
         private readonly IShopRepository _shopRepository;
 

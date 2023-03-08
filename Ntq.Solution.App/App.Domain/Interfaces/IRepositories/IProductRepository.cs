@@ -2,7 +2,6 @@
 using App.Domain.Entities.Results;
 using App.Domain.Enum;
 using App.Domain.Options;
-using Microsoft.AspNetCore.Http;
 
 namespace App.Domain.Interfaces.IRepositories
 {
@@ -10,7 +9,7 @@ namespace App.Domain.Interfaces.IRepositories
     /// Information of IProductRepository
     /// CreaetedBy: Thiep(27/02/2023)
     /// </summary>
-    public interface IProductRepository : IBaseRepository<Product>
+    public interface IProductRepository : IBaseRepository<Product, int>
     {
         /// <summary>
         /// GetAllPaging

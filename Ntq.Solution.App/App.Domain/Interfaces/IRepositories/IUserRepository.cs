@@ -9,7 +9,7 @@ namespace App.Domain.Interfaces.IRepositories
     /// Information of IUserRepository
     /// CreaetedBy: Thiep(27/02/2023)
     /// </summary>
-    public interface IUserRepository : IBaseRepository<User>
+    public interface IUserRepository : IBaseRepository<User, int>
     {
         /// <summary>
         /// GetAllPaging
