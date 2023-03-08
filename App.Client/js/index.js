@@ -2,6 +2,7 @@ $(window).on('load', function() {
     $("#loader").fadeOut("slow");
     $("#content").fadeIn("slow");
 });
+
 $(document).ready(function() {
     new Index();
 })
@@ -22,6 +23,7 @@ class Index {
     TotalPageProduct = 0;
     UserIdSelected = 0;
     ProductIdSelected = 0;
+
     constructor() {
         $('#formlogin').hide();
         $('#formhome').show();
@@ -39,6 +41,7 @@ class Index {
         $("#formlistshop").hide();
         $("#headerUser").hide();
         $("#headerAdmin").show();
+
         // event
         this.initEvents();
         this.loadDataUser();
@@ -48,73 +51,39 @@ class Index {
 
     initEvents() {
         this.clickBtnLogin();
-
         this.clickLinkLogin();
-
         this.clickLinkMyProflie();
-
         this.clickLinkHome();
-
         this.clickLinkListShop();
-
         this.clickLinkListUser();
-
         this.clickLinkListProduct();
-
         this.clickBtnAddUser();
-
         this.clickBtnBackAddEdit();
-
         this.clickBtnBackDelete();
-
         this.clickBtnDelete();
-
         this.clickBtnEdit();
-
         this.clickBtnBackDeleteProduct();
-
         this.clickBtnDeleteProduct();
-
         this.clickBtnAddUserProduct();
-
         this.clickBtnBackAddEditProduct();
-
         this.clickBtnEditProduct();
-
         this.clickBtnLogout();
-
         this.clickBtnBackWaring();
-
         this.clickBtnUpdateUserInfor();
-
         this.clickBtnSaveUser();
-
         this.clickBtnConfirmDeleteUser();
-
         this.clickBtnConfirmDeleteProduct();
-
         this.clickBtnFilterUser();
-
         this.clickBtnFilterProduct();
-
         this.clickBtnNumberPaging();
-
         this.clickBtnNext();
-
         this.clickBtnPrevious();
-
         this.clickBtnNumberPagingProduct();
-
         this.clickBtnNextProduct();
-
         this.clickBtnPreviousProduct();
-
         this.clickBtnNextHome();
-
         this.clickBtnPreviousHome();
-
         this.clickBtnItemShop();
-
         this.clickBtnSaveProduct();
 
         $("#typeadmin").click(function() {
@@ -166,11 +135,6 @@ class Index {
             $('#dropdownMenuStatus').empty();
             $('#dropdownMenuStatus').append("Đã xóa");
         })
-
-        $('.paging').click(function() {
-            $('.paging').removeClass('active-color');
-            $(this).addClass('active-color');
-        });
 
         $("#allTrending").click(function() {
             $('#dropdownTrending').empty();
@@ -306,6 +270,24 @@ class Index {
         return formData;
     }
 
+    eventError(res) {
+        if (res.responseJSON.StatusCode == 404) {
+            $('#box-message-warning').empty();
+            $('#box-message-warning').append(res.responseJSON.Errors[0]);
+            $('#formwarning').show();
+        }
+        if (res.responseJSON.StatusCode == 500) {
+            $('#box-message-warning').empty();
+            $('#box-message-warning').append(res.responseJSON.Errors[0]);
+            $('#formwarning').show();
+        }
+    }
+
+    showForm(formId) {
+        $("#formhome, #formlogin, #formlistuser, #formlistproduct, #formmyprofile, #formlistshop").hide();
+        $(formId).show();
+    }
+
     clickBtnSaveUser() {
         var m = this;
 
@@ -344,16 +326,7 @@ class Index {
                         console.log(response);
                     },
                     error: function(res) {
-                        if (res.responseJSON.StatusCode == 404) {
-                            $('#box-message-warning').empty();
-                            $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                            $('#formwarning').show();
-                        }
-                        if (res.responseJSON.StatusCode == 500) {
-                            $('#box-message-warning').empty();
-                            $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                            $('#formwarning').show();
-                        }
+                        m.eventError(res);
                     }
                 });
             } else {
@@ -377,16 +350,7 @@ class Index {
                         console.log(response);
                     },
                     error: function(res) {
-                        if (res.responseJSON.StatusCode == 404) {
-                            $('#box-message-warning').empty();
-                            $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                            $('#formwarning').show();
-                        }
-                        if (res.responseJSON.StatusCode == 500) {
-                            $('#box-message-warning').empty();
-                            $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                            $('#formwarning').show();
-                        }
+                        m.eventError(res);
                     }
                 });
             }
@@ -438,16 +402,7 @@ class Index {
                         console.log(response);
                     },
                     error: function(res) {
-                        if (res.responseJSON.StatusCode == 404) {
-                            $('#box-message-warning').empty();
-                            $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                            $('#formwarning').show();
-                        }
-                        if (res.responseJSON.StatusCode == 500) {
-                            $('#box-message-warning').empty();
-                            $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                            $('#formwarning').show();
-                        }
+                        m.eventError(res);
                     }
                 });
             } else {
@@ -471,16 +426,7 @@ class Index {
                         console.log(response);
                     },
                     error: function(res) {
-                        if (res.responseJSON.StatusCode == 404) {
-                            $('#box-message-warning').empty();
-                            $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                            $('#formwarning').show();
-                        }
-                        if (res.responseJSON.StatusCode == 500) {
-                            $('#box-message-warning').empty();
-                            $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                            $('#formwarning').show();
-                        }
+                        m.eventError(res);
                     }
                 });
             }
@@ -531,16 +477,7 @@ class Index {
                     console.log(response);
                 },
                 error: function(res) {
-                    if (res.responseJSON.StatusCode == 404) {
-                        $('#box-message-warning').empty();
-                        $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                        $('#formwarning').show();
-                    }
-                    if (res.responseJSON.StatusCode == 500) {
-                        $('#box-message-warning').empty();
-                        $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                        $('#formwarning').show();
-                    }
+                    m.eventError(res);
                 }
             });
         })
@@ -563,16 +500,7 @@ class Index {
                 $('#dropdowntypeuser').append(m.convertTypeUser(user.Type));
             },
             error: function(res) {
-                if (res.responseJSON.StatusCode == 404) {
-                    $('#box-message-warning').empty();
-                    $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                    $('#formwarning').show();
-                }
-                if (res.responseJSON.StatusCode == 500) {
-                    $('#box-message-warning').empty();
-                    $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                    $('#formwarning').show();
-                }
+                m.eventError(res);
             }
         });
     }
@@ -615,85 +543,52 @@ class Index {
                     $('#formlogin').hide();
                 },
                 error: function(res) {
-                    if (res.responseJSON.StatusCode == 404) {
-                        $('#box-message-warning').empty();
-                        $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                        $('#formwarning').show();
-                    }
-                    if (res.responseJSON.StatusCode == 500) {
-                        $('#box-message-warning').empty();
-                        $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                        $('#formwarning').show();
-                    }
+                    m.eventError(res);
                 }
             });
         })
     }
 
     clickLinkLogin() {
+        var m = this;
         $("#login").click(function() {
-            $("#formlogin").show();
-            $("#formhome").hide();
-            $("#formlistuser").hide();
-            $("#formlistproduct").hide();
-            $("#formmyprofile").hide();
-            $("#formlistshop").hide();
-        })
+            m.showForm("#formlogin");
+        });
     }
 
     clickLinkMyProflie() {
+        var m = this;
         $("#myprofile").click(function() {
-            $("#formmyprofile").show();
-            $("#formlogin").hide();
-            $("#formhome").hide();
-            $("#formlistuser").hide();
-            $("#formlistproduct").hide();
-            $("#formlistshop").hide();
-        })
+            m.showForm("#formmyprofile");
+        });
     }
 
     clickLinkHome() {
+        var m = this;
         $("#home").click(function() {
-            $("#formhome").show();
-            $("#formlogin").hide();
-            $("#formlistuser").hide();
-            $("#formlistproduct").hide();
-            $("#formmyprofile").hide();
-            $("#formlistshop").hide();
-        })
+            m.showForm("#formhome");
+        });
     }
 
     clickLinkListUser() {
+        var m = this;
         $("#listuser").click(function() {
-            $("#formlistuser").show();
-            $("#formlogin").hide();
-            $("#formhome").hide();
-            $("#formlistproduct").hide();
-            $("#formmyprofile").hide();
-            $("#formlistshop").hide();
-        })
+            m.showForm("#formlistuser");
+        });
     }
 
     clickLinkListShop() {
+        var m = this;
         $("#shop").click(function() {
-            $("#formlistshop").show();
-            $("#formlogin").hide();
-            $("#formhome").hide();
-            $("#formlistuser").hide();
-            $("#formlistproduct").hide();
-            $("#formmyprofile").hide();
-        })
+            m.showForm("#formlistshop");
+        });
     }
 
     clickLinkListProduct() {
+        var m = this;
         $("#listproduct").click(function() {
-            $("#formlistproduct").show();
-            $("#formlistuser").hide();
-            $("#formlogin").hide();
-            $("#formhome").hide();
-            $("#formmyprofile").hide();
-            $("#formlistshop").hide();
-        })
+            m.showForm("#formlistproduct");
+        });
     }
 
     clickBtnAddUser() {
@@ -727,16 +622,7 @@ class Index {
                     $('#typeSave').append(m.convertTypeUser(response.Data.Type));
                 },
                 error: function(res) {
-                    if (res.responseJSON.StatusCode == 404) {
-                        $('#box-message-warning').empty();
-                        $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                        $('#formwarning').show();
-                    }
-                    if (res.responseJSON.StatusCode == 500) {
-                        $('#box-message-warning').empty();
-                        $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                        $('#formwarning').show();
-                    }
+                    m.eventError(res);
                 }
             })
         });
@@ -934,16 +820,7 @@ class Index {
                     $("#fromFile").val(formData);
                 },
                 error: function(res) {
-                    if (res.responseJSON.StatusCode == 404) {
-                        $('#box-message-warning').empty();
-                        $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                        $('#formwarning').show();
-                    }
-                    if (res.responseJSON.StatusCode == 500) {
-                        $('#box-message-warning').empty();
-                        $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                        $('#formwarning').show();
-                    }
+                    m.eventError(res);
                 }
             })
         });
@@ -987,16 +864,7 @@ class Index {
                     console.log(response);
                 },
                 error: function(res) {
-                    if (res.responseJSON.StatusCode == 404) {
-                        $('#box-message-warning').empty();
-                        $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                        $('#formwarning').show();
-                    }
-                    if (res.responseJSON.StatusCode == 500) {
-                        $('#box-message-warning').empty();
-                        $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                        $('#formwarning').show();
-                    }
+                    m.eventError(res);
                 }
             });
         })
@@ -1023,16 +891,7 @@ class Index {
                     console.log(response);
                 },
                 error: function(res) {
-                    if (res.responseJSON.StatusCode == 404) {
-                        $('#box-message-warning').empty();
-                        $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                        $('#formwarning').show();
-                    }
-                    if (res.responseJSON.StatusCode == 500) {
-                        $('#box-message-warning').empty();
-                        $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                        $('#formwarning').show();
-                    }
+                    m.eventError(res);
                 }
             });
         })
@@ -1083,16 +942,7 @@ class Index {
                 shopName = response.Data.ShopName;
             },
             error: function(res) {
-                if (res.responseJSON.StatusCode == 404) {
-                    $('#box-message-warning').empty();
-                    $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                    $('#formwarning').show();
-                }
-                if (res.responseJSON.StatusCode == 500) {
-                    $('#box-message-warning').empty();
-                    $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                    $('#formwarning').show();
-                }
+                m.eventError(res);
             }
         });
 
@@ -1152,16 +1002,7 @@ class Index {
                 }
             },
             error: function(res) {
-                if (res.responseJSON.StatusCode == 404) {
-                    $('#box-message-warning').empty();
-                    $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                    $('#formwarning').show();
-                }
-                if (res.responseJSON.StatusCode == 500) {
-                    $('#box-message-warning').empty();
-                    $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                    $('#formwarning').show();
-                }
+                m.eventError(res);
             }
         });
     }
@@ -1241,16 +1082,7 @@ class Index {
                 }
             },
             error: function(res) {
-                if (res.responseJSON.StatusCode == 404) {
-                    $('#box-message-warning').empty();
-                    $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                    $('#formwarning').show();
-                }
-                if (res.responseJSON.StatusCode == 500) {
-                    $('#box-message-warning').empty();
-                    $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                    $('#formwarning').show();
-                }
+                m.eventError(res);
             }
         });
     }
@@ -1286,16 +1118,7 @@ class Index {
                 }
             },
             error: function(res) {
-                if (res.responseJSON.StatusCode == 404) {
-                    $('#box-message-warning').empty();
-                    $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                    $('#formwarning').show();
-                }
-                if (res.responseJSON.StatusCode == 500) {
-                    $('#box-message-warning').empty();
-                    $('#box-message-warning').append(res.responseJSON.Errors[0]);
-                    $('#formwarning').show();
-                }
+                m.eventError(res);
             }
         });
     }
