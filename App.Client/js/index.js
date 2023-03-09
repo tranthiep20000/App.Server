@@ -1,8 +1,3 @@
-$(window).on('load', function() {
-    $("#loader").fadeOut("slow");
-    $("#content").fadeIn("slow");
-});
-
 $(document).ready(function() {
     new Index();
 })
@@ -41,6 +36,8 @@ class Index {
         $("#formlistshop").hide();
         $("#headerUser").hide();
         $("#headerAdmin").show();
+        $('#loader').hide();
+        $('#content').show();
 
         // event
         this.initEvents();
@@ -484,13 +481,15 @@ class Index {
     }
 
     getUserById(id, m) {
+        let user = {};
+
         $.ajax({
             type: "GET",
             url: `${m.URL_API}/api/Users/${id}`,
             async: false,
             dataType: "json",
             success: function(response) {
-                let user = response.Data
+                user = response.Data
 
                 $("#usernameinfor").val(user.UserName);
                 $("#passwordinfor").val(atob(user.Password));
@@ -503,6 +502,8 @@ class Index {
                 m.eventError(res);
             }
         });
+
+        return user;
     }
 
     clickBtnLogin() {
@@ -527,9 +528,9 @@ class Index {
                 success: function(response) {
                     m.UserId = jwt_decode(response.Data).UserId
 
-                    m.getUserById(m.UserId, m);
+                    let res = m.getUserById(m.UserId, m);
 
-                    if (m.UserId == 2) {
+                    if (res.Type == 2) {
                         $('#headerUser').show();
                         $('#headerAdmin').hide();
                     } else {
